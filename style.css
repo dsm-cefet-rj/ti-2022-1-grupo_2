@@ -1,0 +1,23 @@
+body {
+    height: 1280px;
+    width: 720px;
+    text-align: center;
+}
+
+.botao-cadastrar {
+    height: 50px;
+    width: 80%;
+    font-size: 12px;
+    background: gray;
+    color: black;
+    margin-top: 30px;
+  }
+
+.botao-sair {
+    height: 40px;
+    width: 50%;
+    font-size: 8px;
+    background: gray;
+    color: black;
+    margin-top: 22px;
+}
