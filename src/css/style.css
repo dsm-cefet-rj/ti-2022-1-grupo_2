@@ -1,0 +1,222 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #FFFCFC;
+    font-size: 1.6rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: #AEABAB;
+    padding: 10px;
+}
+
+#header-items {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#user-actions {
+    display: flex;
+    align-items: center;
+}
+
+#user-config {
+    margin-right: 10px;
+}
+
+#logout > .button {
+    background-color: #E21B1B;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ---------------- FORMULÁRIO -------------------- */
+
+#register-product {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 350px;
+    height: 400px;
+}
+
+form label {
+    display: block;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+input, button, select, textarea {
+    outline: none;
+}
+
+input:focus, button:focus, select:focus, textarea:focus {
+    border: 1px solid lightseagreen;
+}
+
+.input, .button {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #B5B2B2;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.button {
+    cursor: pointer;
+}
+
+form .button:hover {
+    background-color: #AEABAB;
+    transition: background-color ease-in .2s ;
+}
+
+/* ---------------- ACCORDION -------------------- */
+
+#accordion-container {
+    width: 350px;
+    margin-top: 20px;
+}
+
+#accordion-container details {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#accordion-container summary{
+    font-size: 2rem;
+}
+
+/* ---------------- TABELA -------------------- */
+
+table {
+    width: 350px;
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+tbody tr {
+    display: block;
+    margin-bottom: 10px;
+}
+
+tbody td, tfoot td{
+    border: 1px solid #484444;
+    border-collapse: collapse;
+}
+
+thead th, tbody td{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: #C4C4C4;
+}
+
+
+thead th{
+    visibility: hidden;
+    padding: 0;
+    height: 0;
+    width: 0;
+}
+
+tbody td {
+    position: relative;
+}
+
+tbody td::before {
+    position: absolute;
+    content: attr(data-label);
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+tbody td > span {
+    align-self: flex-end;
+}
+
+tbody td[data-label="comentários"] > span{
+    width: 200px;
+    text-align: justify;
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    justify-content: space-evenly;
+    background-color: #797979;
+}
+
+.btn-container .button {
+    width: 100px;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 8px 0;
+}
+
+#update {
+    background-color: #1EBC1B;
+}
+
+#delete {
+    background-color: #E21B1B;
+}
+
+/* ---------------- ALERTA -------------------- */
+
+.alert {
+    padding: 10px;
+    position: fixed;
+    top: 100px;
+    width: 380px;
+    background-color: #F9BB1B;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.alert h4 {
+    font-size: 2.4rem;
+}
+
+.alert p {
+    font-weight: 500;
+}
+
+.closed-icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    background: url(/src/img/xmark-solid.svg) no-repeat;
+    cursor: pointer;
+}
