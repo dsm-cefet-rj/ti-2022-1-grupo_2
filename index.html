@@ -1,61 +1,256 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>0 Desperdício</title>
+    <link rel="stylesheet" type="text/css" href="src/css/style.css" media="screen">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <form action="">
-        <div id="div">
-            <h1><strong>Categoria</strong></h1>
-            <select>
-                <option selected disabled>Selecione</option>
-                <option>Geladeira</option>
-                <option>Armário</option>
-                <option>Suplementos</option>
-                <option>Remédios</option>
-            </select> 
+    <header id="header">
+        <div id="header-items">
+            <h1>Logo</h1>
+            <div id="user-actions">
+                <div id="user-config">
+                    <a href="#">Configurar usuário</a>
+                </div>
+                <div id="logout">
+                    <button class="button">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form action="#" id="register-product" method="post">
+            <div id="cateogory-container">
+                <label for="produtct-category">Categoria</label>
+                <select id="produtct-category" class="input" name="category">
+                    <option selected disabled>Selecione</option>
+                    <option value="geladeira">Geladeira</option>
+                    <option value="armário">Armário</option>
+                    <option value="suplementos">Suplementos</option>
+                    <option value="remédios">Remédios</option>
+                </select> 
+            </div>
+    
+            <div id="name-container">
+                <label for="name-product">Nome do produto</label>
+                <input type="text" class="input" id="name-product" name="name-product" placeholder="Nome do produto">
+            </div>
+    
+            <div id="expiration-container">
+                <label for="expiration-date">Data de validade</label>
+                <input type="date" class="input" id="expiration-date" name="expirations-date">
+            </div>
+    
+            <div id="quantity-container">
+                <label for="quantity">Quantidade</label>
+                <input type="text" class="input" id="quantity" name="quantity" placeholder="Quantidade">
+            </div>
+    
+            <div id="comments-container">
+                <label for="comments">Comentários</label>
+                <textarea class="input" id="comments" name="comments" placeholder="Comentários"></textarea>
+            </div>
+    
+            <button id="botao-cadastrar" class="button" type="submit">Cadastrar produto</button>
+        </form>
+    
+        <div id="accordion-container">
+            <details>
+                <summary>Geladeira</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de validade</th>
+                            <th>Quantidade</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+            <details>
+                <summary>Armário</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de validade</th>
+                            <th>Quantidade</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+            <details>
+                <summary>Suplementos</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de validade</th>
+                            <th>Quantidade</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+            <details>
+                <summary>Remédios</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de validade</th>
+                            <th>Quantidade</th>
+                            <th>Comentários</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="nome"><span>Queijo Minas</span></td>
+                            <td data-label="validade"><span>20/06/2022</span></td>
+                            <td data-label="quantidade"><span>1 u.n.</span></td>
+                            <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+                            <td class="btn-container">
+                                <button id="update" class="button">Atualizar</button>
+                                <button id="delete" class="button">Apagar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
         </div>
 
-        <div id="div">
-            <h1><strong>Nome do produto</strong></h1>
-            <input type="text" >
+        <div class="alert">
+            <h4>Alerta!!!</h4>
+            <p>Faltam N dias para a validade do produto X expirar.</p>
+            <span class="closed-icon"></span>
         </div>
+    </main>
 
-        <div id="div">
-            <h1><strong>Data de validade</strong></h1>
-            <input type="date" >
-        </div>
-
-        <div id="div">
-            <h1><strong>Quantidade</strong></h1>
-            <input type="text" >
-        </div>
-
-        <div id="div">
-            <h1><strong>Comentários</strong></h1>
-            <textarea cols="30" rows="10" style="width: 26em"></textarea>
-        </div>
-
-        <button class="botao-cadastrar" type="submit">Cadastrar produto</button>
-    </form>
-
-    <!-- Usar as divs abaixo para fazer as demais entidades e seu CSS e, se  quiser, pode alterar o CSS q eu fiz -->
-
-    <div></div>
-
-    <div></div>
-
-    <div></div>
-
-    <div></div>
-
-    <button class="botao-sair" type="button">Sair</button>
-
+    <script src="src/js/index.js"></script>
 </body>
 
 </html>
