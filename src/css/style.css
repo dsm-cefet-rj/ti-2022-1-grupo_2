@@ -18,19 +18,19 @@ a {
 }
 
 body {
-    background-color: #FFFCFC;
+    background-color: #CAFFB8;
     font-size: 1.6rem;
     font-family: 'Inter', sans-serif;
 }
 
 /* ------------ TOPO ------------- */
 
+
 #header {
     display: flex;
     align-items: center;
     height: 70px;
-    background-color: #AEABAB;
-    padding: 10px;
+    background-color: #88EB95;
 }
 
 #header-items {
@@ -149,96 +149,49 @@ form .button:hover {
 /* ---------------- ACCORDION -------------------- */
 
 #accordion-container {
-    width: 350px;
+    width: 100%;
     margin-top: 20px;
 }
 
 #accordion-container details {
-    margin-bottom: 10px;
-    cursor: pointer;
+    margin-bottom: 30px;
 }
 
 #accordion-container summary{
     font-size: 2rem;
+    cursor: pointer;
 }
 
 /* ---------------- TABELA -------------------- */
 
-table {
-    width: 350px;
-    position: relative;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
 
-tbody tr {
-    display: block;
-    margin-bottom: 10px;
-}
-
-tbody td, tfoot td{
+table, td, th {
     border: 1px solid #484444;
     border-collapse: collapse;
 }
 
 thead th, tbody td{
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    background-color: #C4C4C4;
+    padding: 5px;
+    text-align: center;
 }
 
-thead th{
-    visibility: hidden;
-    padding: 0;
-    height: 0;
-    width: 0;
+thead > tr {
+    background-color: #88EB95;
 }
 
-tbody td {
-    position: relative;
-}
-
-tbody td::before {
-    position: absolute;
-    content: attr(data-label);
-    text-transform: capitalize;
-    font-weight: 700;
-}
-
-tbody td > span {
-    align-self: flex-end;
-}
-
-tbody td[data-label="comentários"] > span{
-    width: 200px;
-    text-align: justify;
-}
-
-.btn-container{
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-    justify-content: space-evenly;
-    background-color: #797979;
-}
-
-.btn-container .button {
-    width: 100px;
-    border: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 8px 0;
+tbody > tr {
+    background-color: #ACEBA4;
 }
 
 #update {
     background-color: #1EBC1B;
+    margin-bottom: 5px;
 }
 
 #delete {
     background-color: #E21B1B;
 }
+
 
 /* ---------------- ALERTA E NOTIFICAÇÃO -------------------- */
 
@@ -280,6 +233,10 @@ tbody td[data-label="comentários"] > span{
     cursor: pointer;
 }
 
+#bell-container {
+    position: relative;
+}
+
 #bell {
     display: inline-block;
     width: 25px;
@@ -298,6 +255,7 @@ tbody td[data-label="comentários"] > span{
     height: 25px;
     border-radius: 50%;
     background-color: #E21B1B;
+    font-size: 1.2rem;
     color: #FFFCFC;
 }
 
@@ -325,4 +283,268 @@ tbody td[data-label="comentários"] > span{
 
 #notifications-list.open {
     visibility: visible;
+}
+
+
+/* --------------------- MEDIA QUERIES ----------------------- */
+
+@media(min-width: 360px){
+    .container {
+        max-width: 85%;
+        margin: 0 auto;
+    }
+}
+
+
+@media(min-width: 768px){
+
+    #category-container {
+        grid-area: category;
+    }
+
+    #name-container {
+        grid-area: name;
+    }
+
+    #expiration-container {
+        grid-area: expiration;
+    }
+
+    #quantity-container {
+        grid-area: quantity;
+    }
+
+    #comments-container {
+        grid-area: comments;
+    }
+
+    #botao-cadastrar {
+        grid-area: submit;
+    }
+
+    #header > #header-items {
+        display: grid;
+        grid-template-columns: 80% 1fr 1fr;
+        gap: 10px;
+    }
+
+    #notifications-alert {
+        justify-content: flex-end;
+        right: 10px;
+    }
+
+    #register-product {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "category name"
+            "expiration quantity"
+            "comments comments"
+            "submit submit"
+        ;
+        width: 60%;
+        height: auto;
+    }
+}
+
+@media(max-width: 399px){
+    #header-items > h1 {
+        font-size: 2.5rem;
+    }
+
+    #login-icon > img{
+        width: 40px;
+        height: 40px;
+    }
+
+    #notifications-alert {
+        right: 14px;
+    }
+
+    #bell {
+        width: 20px;
+        height: 20px;
+    }
+
+    #notifications-count {
+        width: 20px;
+        height: 20px;
+        left: 12px;
+    }
+
+
+    .alert {
+        width: 300px;
+    }
+
+    #register-product {
+        width: 300px;
+    }
+
+    #accordion-container {
+        width: 300px;
+    }
+
+    #accordion-container details {
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 300px;
+        position: relative;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    
+    tbody tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    table { border: none; }
+
+    tbody td, tfoot td{
+        border: 1px solid #484444;
+        border-collapse: collapse;
+    }
+    
+    thead > tr {
+        background-color: transparent;
+    }
+
+    thead th, tbody td{
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: #88EB95;
+    }
+    
+    thead th{
+        visibility: hidden;
+        padding: 0;
+        height: 0;
+        width: 0;
+    }
+    
+    tbody td {
+        position: relative;
+    }
+    
+    tbody td::before {
+        position: absolute;
+        content: attr(data-label);
+        text-transform: capitalize;
+        font-weight: 700;
+    }
+    
+    tbody td > span {
+        align-self: flex-end;
+    }
+    
+    tbody td[data-label="comentários"] > span{
+        width: 200px;
+        text-align: justify;
+    }
+    
+    .btn-container{
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+        justify-content: space-evenly;
+        background-color: #ACEBA4;
+    }
+    
+    .btn-container .button {
+        width: 100px;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 8px 0;
+    }
+}
+
+@media(min-width: 400px) and (max-width: 799px){
+    #accordion-container {
+        width: 350px;
+    }
+
+    #accordion-container details {
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 350px;
+        position: relative;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    
+    tbody tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    table { border: none; }
+
+    tbody td, tfoot td{
+        border: 1px solid #484444;
+        border-collapse: collapse;
+    }
+    
+    thead > tr {
+        background-color: transparent;
+    }
+
+    thead th, tbody td{
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: #88EB95;
+    }
+    
+    thead th{
+        visibility: hidden;
+        padding: 0;
+        height: 0;
+        width: 0;
+    }
+    
+    tbody td {
+        position: relative;
+    }
+    
+    tbody td::before {
+        position: absolute;
+        content: attr(data-label);
+        text-transform: capitalize;
+        font-weight: 700;
+    }
+    
+    tbody td > span {
+        align-self: flex-end;
+    }
+    
+    tbody td[data-label="comentários"] > span{
+        width: 200px;
+        text-align: justify;
+    }
+    
+    .btn-container{
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+        justify-content: space-evenly;
+        background-color: #ACEBA4;
+    }
+    
+    .btn-container .button {
+        width: 100px;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 8px 0;
+    }
 }
