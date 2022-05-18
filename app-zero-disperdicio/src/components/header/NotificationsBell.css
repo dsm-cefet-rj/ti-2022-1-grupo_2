@@ -1,0 +1,59 @@
+#notifications-alert {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 10px;
+    cursor: pointer;
+}
+
+#bell-container {
+    position: relative;
+}
+
+#bell {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(../../img/bell-solid.svg) no-repeat;
+}
+
+#notifications-count {
+    position: absolute;
+    top: -8px;
+    left: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #E21B1B;
+    font-size: 1.2rem;
+    color: #FFFCFC;
+}
+
+#notifications-list {
+    position: absolute;
+    top: -5px;
+    right: 35px;
+    width: 250px;
+    height: 218px;
+    visibility: hidden;
+    overflow-y: scroll;
+    font-size: 1.4rem;
+    cursor: auto;
+}
+
+#notifications-list > li {
+    position: relative;
+}
+
+.delete-notification {
+    top: 5px;
+    right: 5px;
+    border-radius: 50%;
+}
+
+#notifications-list.open {
+    visibility: visible;
+}

@@ -1,0 +1,13 @@
+#header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: #88EB95;
+  }
+  
+  #header-items {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
