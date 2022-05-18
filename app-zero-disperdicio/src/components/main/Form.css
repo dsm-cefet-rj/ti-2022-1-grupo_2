@@ -1,0 +1,34 @@
+form label {
+    display: block;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+input, button, select, textarea {
+    outline: none;
+}
+
+input:focus, button:focus, select:focus, textarea:focus {
+    border: 1px solid lightseagreen;
+}
+
+.input, .button {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #B5B2B2;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.button {
+    cursor: pointer;
+}
+
+form .button:hover {
+    background-color: #AEABAB;
+    transition: background-color ease-in .2s ;
+}
