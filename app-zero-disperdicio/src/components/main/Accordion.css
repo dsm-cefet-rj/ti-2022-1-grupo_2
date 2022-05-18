@@ -1,0 +1,13 @@
+#accordion-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#accordion-container details {
+    margin-bottom: 30px;
+}
+
+#accordion-container summary{
+    font-size: 2rem;
+    cursor: pointer;
+}

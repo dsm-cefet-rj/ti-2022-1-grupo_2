@@ -1,0 +1,26 @@
+table, td, th {
+    border: 1px solid #484444;
+    border-collapse: collapse;
+}
+
+thead th, tbody td{
+    padding: 5px;
+    text-align: center;
+}
+
+thead > tr {
+    background-color: #88EB95;
+}
+
+tbody > tr {
+    background-color: #ACEBA4;
+}
+
+#update {
+    background-color: #1EBC1B;
+    margin-bottom: 5px;
+}
+
+#delete {
+    background-color: #E21B1B;
+}
