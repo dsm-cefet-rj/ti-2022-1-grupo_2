@@ -15,17 +15,17 @@ export default function Form(){
     
             <div id="name-container">
                 <label for="name-product">Nome do produto</label>
-                 
+                <input type="text" className="input" id="name-product" name="name-product" placeholder="Nome do produto"/>
             </div>
     
             <div id="expiration-container">
                 <label for="expiration-date">Data de validade</label>
-                
+                <input type="date" className="input" id="expiration-date" name="expirations-date"/>
             </div>
     
             <div id="quantity-container">
                 <label for="quantity">Quantidade</label>
-                
+                <input type="text" className="input" id="quantity" name="quantity" placeholder="Quantidade"/>
             </div>
     
             <div id="comments-container">
