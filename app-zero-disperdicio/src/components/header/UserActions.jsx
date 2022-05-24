@@ -7,7 +7,7 @@ export default function UserActions() {
             <div id="login-icon">
                 <img src={loginIcon} width="50" height="50" />
             </div>
-            <ul id="user-options" class="list-items">
+            <ul id="user-options" className="list-items">
                 <li><a href="#">Configurar usuário</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
