@@ -1,0 +1,28 @@
+.principal-menu > ul{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 500;
+}
+
+.principal-menu > ul > li {
+    text-align: center;
+    position: relative;
+    width: 20%;
+    /* margin: 0 20px; */
+}
+
+.principal-menu > ul > li a {
+    padding: 10px;
+}
+
+.underline {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 20%;
+    height: 3px;
+    transform: translateX(0);
+    background-color: #000;
+    transition: transform .3s ease-in;
+}
