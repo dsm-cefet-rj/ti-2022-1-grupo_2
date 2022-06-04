@@ -1,26 +1,44 @@
 import './Accordion.css'
-import Table from './Table';
+import React, {Provider}  from 'react';
+import ListagemTabela from './Table';
+import store from './store';
+//import ProjetoReducer from './ProjetoSlice';
+//import Table from './Table';
 
-export default function Accordion() {
+
+  /*  const projeto = [
+    {nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
+    {nome:'Chocolate em pó em pó', dataDeValidade:'14/12/2022', quantidade:'3,0kg', comentarios:'Usar para fazer brigadeiro, bolo e bebidas'}
+]    */
+const Accordion = (props) => {
+    
+    /* (
+        [{nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
+        {nome:'Chocolate em pó em pó', dataDeValidade:'14/12/2022', quantidade:'3,0kg', comentarios:'Usar para fazer brigadeiro, bolo e bebidas'}]
+    );   */
+
     return (
+        <Provider store={store}>
         <div id="accordion-container">
             <details>
                 <summary>Geladeira</summary>
-                <Table />
+                <ListagemTabela  />
             </details>
             <details>
                 <summary>Armário</summary>
-                <Table />
+                <ListagemTabela  />
             </details>
             <details>
                 <summary>Suplementos</summary>
-                <Table />
+                <ListagemTabela />
             </details>
             <details>
                 <summary>Remédios</summary>
-                <Table />
+                <ListagemTabela  />
             </details>
 
         </div>
-    )
-}
+        </Provider>
+    );
+    }  
+    export default Accordion;
