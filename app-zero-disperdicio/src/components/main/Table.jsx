@@ -1,6 +1,61 @@
+import React from 'react';
 import './Table.css';
+import {useSelector, useDispatch} from 'react-redux';
+import {deleteProjeto} from './ProjetoSlice';
 
-export default function Table() {
+export default function ListagemTabela(props){
+
+    const projeto = useSelector(state => state.projeto);
+    const dispatch = useDispatch();
+        
+      
+    function handleClickExcluirProjeto(id){
+         dispatch(deleteProjeto(id));
+    }
+
+    return(
+        <>
+              
+            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+              
+        </>
+    );
+    
+}
+
+ const LinhaTabela = (props) => {
+    return(
+        <tr>
+            <td>{props.projeto.nome}</td>
+            <td>{props.projeto.dataDeValidade}</td>
+            <td>{props.projeto.quantidade}</td>
+            <td>{props.projeto.comentarios}</td>
+            <td><button id="update" className="button">Atualizar</button></td>
+            <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button></td>
+        </tr>
+    );
+}
+
+ function Tabela(props){
+    return(
+        <table border='1'>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de validade</th>
+                    <th>Quantidade</th>
+                    <th>Comentários</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.projeto.map((projeto) => <LinhaTabela key={projeto.id} projeto={projeto} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
+            </tbody>
+        </table>
+    );
+} 
+
+/* export default function Table() {
     return (
         <table>
             <thead>
@@ -46,4 +101,4 @@ export default function Table() {
             </tbody>
         </table>
     )
-}
+} */
