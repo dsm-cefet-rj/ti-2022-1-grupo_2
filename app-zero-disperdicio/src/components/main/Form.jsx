@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import {addProjeto, updateProjeto} from './ProjetoSlice';
 
-export default function Form(props){
+export default function Form(){
     const projeto = useSelector(state => state.projeto); 
 
     const history = useHistory();
@@ -16,7 +16,7 @@ export default function Form(props){
     const [product, setProduct] = useState(
         id ? projeto.filter((p) => p.id === id)[0] ?? {} : {} );
 
-    const [actiontype, ] = useState(
+    const [actiontype] = useState(
         id ?
         projeto.filter((p) => p.id === id)[0] 
         ? 'projeto/updateProjeto'

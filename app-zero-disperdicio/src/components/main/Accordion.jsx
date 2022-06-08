@@ -1,6 +1,6 @@
 import './Accordion.css'
-import React, {Provider}  from 'react';
 import ListagemTabela from './Table';
+import {Provider}  from 'react-redux';
 import store from './store';
 //import ProjetoReducer from './ProjetoSlice';
 //import Table from './Table';
@@ -10,23 +10,24 @@ import store from './store';
     {nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
     {nome:'Chocolate em pó em pó', dataDeValidade:'14/12/2022', quantidade:'3,0kg', comentarios:'Usar para fazer brigadeiro, bolo e bebidas'}
 ]    */
-const Accordion = (props) => {
-    
+const Accordion = () => {
+
     /* (
         [{nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
         {nome:'Chocolate em pó em pó', dataDeValidade:'14/12/2022', quantidade:'3,0kg', comentarios:'Usar para fazer brigadeiro, bolo e bebidas'}]
     );   */
 
-    return (
+    return(
         <Provider store={store}>
         <div id="accordion-container">
             <details>
                 <summary>Geladeira</summary>
-                <ListagemTabela  />
+                <ListagemTabela />
+                
             </details>
             <details>
                 <summary>Armário</summary>
-                <ListagemTabela  />
+                <ListagemTabela />
             </details>
             <details>
                 <summary>Suplementos</summary>
@@ -36,9 +37,9 @@ const Accordion = (props) => {
                 <summary>Remédios</summary>
                 <ListagemTabela  />
             </details>
-
+            
         </div>
         </Provider>
-    );
-    }  
+    )
+    } 
     export default Accordion;

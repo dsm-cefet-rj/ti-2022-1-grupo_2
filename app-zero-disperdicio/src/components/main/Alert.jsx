@@ -6,10 +6,10 @@ export default function Alert(){
     }
 
     return (
-        <div class="alert">
+        <div className="alert">
             <h4>Alerta!!!</h4>
             <p>Faltam N dias para a validade do produto X expirar.</p>
-            <span class="closed-icon" onClick={closedAlert}></span>
+            <span className="closed-icon" onClick={closedAlert}></span>
         </div>
     )
 }

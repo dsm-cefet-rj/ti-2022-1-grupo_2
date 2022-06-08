@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 
-    const InitialProjeto = [{id:'1', nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
+    const initialProjeto = [{id:'1', nome:'Sabão em pó', dataDeValidade:'25/05/2023', quantidade:'3L', comentarios:'Usar para lavar roupas'},
      {id:'2', nome:'Chocolate em pó em pó', dataDeValidade:'14/12/2022', quantidade:'3,0kg', comentarios:'Usar para fazer brigadeiro, bolo e bebidas'}];
 
  function addProjetoReducer(projeto, product){
@@ -21,7 +21,7 @@ function deleteProjetoReducer(projeto, id){
 
 export const projetoSlice = createSlice ({
      name: 'projeto',
-     InitialState: InitialProjeto,
+     initialState: initialProjeto,
      reducers: {
          addProjeto: (state, action) => addProjetoReducer(state, action.payload),
          updateProjeto: (state, action) => updateProjetoReducer(state, action.payload),
