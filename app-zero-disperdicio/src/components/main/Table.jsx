@@ -3,7 +3,9 @@ import './Table.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteProjeto} from './ProjetoSlice';
 
-export default function ListagemTabela(props){
+//import {Link} from "react-router-dom";
+
+export default function ListagemTabela(){
 
     const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ export default function ListagemTabela(props){
     return(
         <>
               
-            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+            <Tabela projeto={projeto} dispatch={dispatch} onClickExcluirProjeto={handleClickExcluirProjeto} />
               
         </>
     );
@@ -26,18 +28,20 @@ export default function ListagemTabela(props){
  const LinhaTabela = (props) => {
     return(
         <tr>
-            <td>{props.projeto.nome}</td>
-            <td>{props.projeto.dataDeValidade}</td>
-            <td>{props.projeto.quantidade}</td>
-            <td>{props.projeto.comentarios}</td>
+           {/* <Link to= {"/projeto/${props.product.id}"}><button></button></Link>  */}
+            <td>{props.product.nome}</td>
+            <td>{props.product.dataDeValidade}</td>
+            <td>{props.product.quantidade}</td>
+            <td>{props.product.comentarios}</td>
             <td><button id="update" className="button">Atualizar</button></td>
-            <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button></td>
+            <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.product.id)}>Apagar</button></td>
         </tr>
     );
 }
 
  function Tabela(props){
     return(
+        
         <table border='1'>
             <thead>
                 <tr>
@@ -49,7 +53,7 @@ export default function ListagemTabela(props){
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaTabela key={projeto.id} projeto={projeto} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
+                {props.projeto.map((product) => <LinhaTabela key={product.id} product={product} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
             </tbody>
         </table>
     );
