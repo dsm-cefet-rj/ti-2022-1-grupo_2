@@ -7,7 +7,7 @@ export default function HorizontalMenu(){
 
     function itemSelected(pos){
         console.log(underline.current)
-        underline.current.style.transform = `translateX(${134 * pos}px)` 
+        underline.current.style.transform = `translateX(${137 * pos}px)` 
     }
     listItems.forEach(listItem => listItem.addEventListener('click', itemSelected))
 

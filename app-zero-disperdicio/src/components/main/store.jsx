@@ -6,7 +6,5 @@ import ProjetoReducer from './ProjetoSlice';
     reducer: {
     projeto: ProjetoReducer
     }
-});
-
-export default store;
- 
+})
+export default store; 
