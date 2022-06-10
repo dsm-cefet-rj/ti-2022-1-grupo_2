@@ -7,8 +7,6 @@ import {addProjeto, updateProjeto} from './ProjetoSlice';
 export default function Form(){
     const projeto = useSelector(state => state.projeto); 
 
-   // const history = useHistory();
-
     const dispatch = useDispatch();
     let {id} = useParams();
     id = parseInt(id);
@@ -24,8 +22,10 @@ export default function Form(){
         : 'projeto/addProjeto'
     );
 
+//const history = useHistory();
+
     function handleInputChange(e){
-        setProduct( {...product, [e.target.nome]:e.target.value} );
+        setProduct( {...product, [e.target.name]: e.target.value} );
     }
 
     function handleSubmit(e){
@@ -35,7 +35,7 @@ export default function Form(){
         }else{
             dispatch(updateProjeto(product));
         }
-       // history.push('/projeto');
+      //  history.push('/projeto');
     }
 
     return(
