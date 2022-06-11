@@ -1,44 +1,52 @@
 import React from 'react';
 import './Table.css';
-import {useSelector, useDispatch} from 'react-redux';
-import {deleteProjeto} from './ProjetoSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteProjeto } from './ProjetoSlice';
 
-export default function ListagemTabela(props){
+export default function ListagemTabela(props) {
 
     const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
-        
-      
-    function handleClickExcluirProjeto(id){
-         dispatch(deleteProjeto(id));
+
+
+    function handleClickExcluirProjeto(id) {
+        dispatch(deleteProjeto(id));
     }
 
-    return(
+    return (
         <>
-              
             <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
-              
         </>
     );
-    
+
 }
 
- const LinhaTabela = (props) => {
-    return(
+const LinhaTabela = (props) => {
+    return (
         <tr>
-            <td>{props.projeto.nome}</td>
-            <td>{props.projeto.dataDeValidade}</td>
-            <td>{props.projeto.quantidade}</td>
-            <td>{props.projeto.comentarios}</td>
-            <td><button id="update" className="button">Atualizar</button></td>
-            <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button></td>
+            <td data-label="nome">
+                <span>{props.projeto.nome}</span>
+            </td>
+            <td data-label="validade">
+                <span>{props.projeto.dataDeValidade}</span>
+            </td>
+            <td data-label="quantidade">
+                <span>{props.projeto.quantidade}</span>
+            </td>
+            <td data-label="comentários">
+                <span>{props.projeto.comentarios}</span>
+            </td>
+            <td class="btn-container">
+                <button id="update" className="button">Atualizar</button>
+                <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
+            </td>
         </tr>
     );
 }
 
- function Tabela(props){
-    return(
-        <table border='1'>
+function Tabela(props) {
+    return (
+        <table>
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -53,52 +61,52 @@ export default function ListagemTabela(props){
             </tbody>
         </table>
     );
-} 
+}
 
-/* export default function Table() {
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Data de validade</th>
-                    <th>Quantidade</th>
-                    <th>Comentários</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="nome"><span>Queijo Minas</span></td>
-                    <td data-label="validade"><span>20/06/2022</span></td>
-                    <td data-label="quantidade"><span>1 u.n.</span></td>
-                    <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-                    <td class="btn-container">
-                        <button id="update" class="button">Atualizar</button>
-                        <button id="delete" class="button">Apagar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="nome"><span>Queijo Minas</span></td>
-                    <td data-label="validade"><span>20/06/2022</span></td>
-                    <td data-label="quantidade"><span>1 u.n.</span></td>
-                    <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-                    <td class="btn-container">
-                        <button id="update" class="button">Atualizar</button>
-                        <button id="delete" class="button">Apagar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="nome"><span>Queijo Minas</span></td>
-                    <td data-label="validade"><span>20/06/2022</span></td>
-                    <td data-label="quantidade"><span>1 u.n.</span></td>
-                    <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-                    <td class="btn-container">
-                        <button id="update" class="button">Atualizar</button>
-                        <button id="delete" class="button">Apagar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    )
-} */
+// export default function Table() {
+//     return (
+//         <table>
+//             <thead>
+//                 <tr>
+//                     <th>Nome</th>
+//                     <th>Data de validade</th>
+//                     <th>Quantidade</th>
+//                     <th>Comentários</th>
+//                     <th></th>
+//                 </tr>
+//             </thead>
+//             <tbody>
+//                 <tr>
+//                     <td data-label="nome"><span>Queijo Minas</span></td>
+//                     <td data-label="validade"><span>20/06/2022</span></td>
+//                     <td data-label="quantidade"><span>1 u.n.</span></td>
+//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+//                     <td class="btn-container">
+//                         <button id="update" class="button">Atualizar</button>
+//                         <button id="delete" class="button">Apagar</button>
+//                     </td>
+//                 </tr>
+//                 <tr>
+//                     <td data-label="nome"><span>Queijo Minas</span></td>
+//                     <td data-label="validade"><span>20/06/2022</span></td>
+//                     <td data-label="quantidade"><span>1 u.n.</span></td>
+//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+//                     <td class="btn-container">
+//                         <button id="update" class="button">Atualizar</button>
+//                         <button id="delete" class="button">Apagar</button>
+//                     </td>
+//                 </tr>
+//                 <tr>
+//                     <td data-label="nome"><span>Queijo Minas</span></td>
+//                     <td data-label="validade"><span>20/06/2022</span></td>
+//                     <td data-label="quantidade"><span>1 u.n.</span></td>
+//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
+//                     <td class="btn-container">
+//                         <button id="update" class="button">Atualizar</button>
+//                         <button id="delete" class="button">Apagar</button>
+//                     </td>
+//                 </tr>
+//             </tbody>
+//         </table>
+//     )
+// }

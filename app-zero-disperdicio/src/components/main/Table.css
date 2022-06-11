@@ -1,3 +1,7 @@
+table {
+    width: 100%;
+}
+
 table, td, th {
     border: 1px solid #484444;
     border-collapse: collapse;
@@ -23,4 +27,116 @@ tbody > tr {
 
 #delete {
     background-color: #E21B1B;
+}
+
+@media(max-width: 399px) {
+    table {
+        width: 280px;
+        font-size: 1.3rem;
+    }
+
+    table td::before {
+        content: '';
+        font-size: 1.3rem
+    }
+    
+    #accordion-container {
+        width: 280px;
+    }
+
+    tbody td[data-label="comentários"] > span{
+        display: inline-block;
+        margin-top: 10px;
+        width: 150px;
+        text-align: right; /*Justify*/
+    }
+}
+
+@media(min-width: 400px) and (max-width: 799px){
+    #accordion-container {
+        width: 350px;
+    }
+
+    table {
+        width: 350px;
+        font-size: 1.5rem;
+    }
+
+    tbody td[data-label="comentários"] > span{
+        width: 200px;
+        text-align: right; /*Justify*/
+    }
+}
+
+@media(max-width: 799px){
+    #accordion-container details {
+        margin-bottom: 10px;
+    }
+
+    table {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    tbody tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    table { border: none; }
+
+    tbody td, tfoot td{
+        border: 1px solid #484444;
+        border-collapse: collapse;
+    }
+    
+    thead > tr {
+        background-color: transparent;
+    }
+
+    thead th, tbody td{
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: #88EB95;
+    }
+    
+    thead th{
+        visibility: hidden;
+        padding: 0;
+        height: 0;
+        width: 0;
+    }
+    
+    tbody td {
+        position: relative;
+    }
+    
+    tbody td::before {
+        position: absolute;
+        content: attr(data-label);
+        text-transform: capitalize;
+        font-weight: 700;
+    }
+    
+    tbody td > span {
+        align-self: flex-end;
+    }
+    
+    .btn-container{
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+        justify-content: space-evenly;
+        background-color: #ACEBA4;
+    }
+    
+    .btn-container .button {
+        width: 100px;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 8px 0;
+    }
 }

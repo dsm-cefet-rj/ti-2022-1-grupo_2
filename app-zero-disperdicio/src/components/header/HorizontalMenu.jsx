@@ -7,7 +7,7 @@ export default function HorizontalMenu(){
 
     function itemSelected(pos){
         console.log(underline.current)
-        underline.current.style.transform = `translateX(${137 * pos}px)` 
+        underline.current.style.transform = `translateX(${100 * pos}%)` 
     }
     listItems.forEach(listItem => listItem.addEventListener('click', itemSelected))
 
@@ -20,7 +20,7 @@ export default function HorizontalMenu(){
         <nav className="principal-menu">
             <ul>
                 <div className="underline" ref={underline}></div>
-                <li onClick={() => itemSelected(0)}><a href="/">Home</a></li>
+                <li onClick={() => itemSelected(0)}><a href="#home">Home</a></li>
                 <li onClick={() => itemSelected(1)}><a href="#geladeira">Geladeira</a></li>
                 <li onClick={() => itemSelected(2)}><a href="#armario">Armário</a></li>
                 <li onClick={() => itemSelected(3)}><a href="#suplementos">Suplementos</a></li>
