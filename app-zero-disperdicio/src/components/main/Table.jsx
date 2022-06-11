@@ -1,7 +1,8 @@
 import React from 'react';
 import './Table.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {deleteProjeto} from './ProjetoSlice';
+import {deleteProjeto,updateProjeto} from './ProjetoSlice';
+import Form from './Form';
 
 export default function ListagemTabela(props){
 
@@ -13,10 +14,15 @@ export default function ListagemTabela(props){
          dispatch(deleteProjeto(id));
     }
 
+    function handleClickAtualizarProjeto(id){
+        dispatch(updateProjeto(id));
+    }
+
+
     return(
         <>
-              
-            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+            
+            <Tabela projeto={projeto} onClickAtualizarProjeto={handleClickAtualizarProjeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
               
         </>
     );
@@ -30,7 +36,7 @@ export default function ListagemTabela(props){
             <td>{props.projeto.dataDeValidade}</td>
             <td>{props.projeto.quantidade}</td>
             <td>{props.projeto.comentarios}</td>
-            <td><button id="update" className="button">Atualizar</button></td>
+            <td><button id="update" className="button" onClick={() => Form.handleSubmit}>Atualizar</button></td>
             <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button></td>
         </tr>
     );
@@ -49,7 +55,7 @@ export default function ListagemTabela(props){
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaTabela key={projeto.id} projeto={projeto} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
+                {props.projeto.map((projeto) => <LinhaTabela key={projeto.id} projeto={projeto} onClickAtualizarProjeto={props.onClickAtualizarProjeto} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
             </tbody>
         </table>
     );
