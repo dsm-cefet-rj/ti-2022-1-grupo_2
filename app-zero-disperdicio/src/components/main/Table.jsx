@@ -15,7 +15,7 @@ export default function ListagemTabela(props){
     }
 
     function handleClickAtualizarProjeto(id){
-        dispatch(updateProjeto(id));
+        Form.handleSubmit(id);
     }
 
 
@@ -36,7 +36,7 @@ export default function ListagemTabela(props){
             <td>{props.projeto.dataDeValidade}</td>
             <td>{props.projeto.quantidade}</td>
             <td>{props.projeto.comentarios}</td>
-            <td><button id="update" className="button" onClick={() => Form.handleSubmit}>Atualizar</button></td>
+            <td><button id="update" className="button" onClick={() => props.onClickAtualizarProjeto(props.projeto.id)}>Atualizar</button></td>
             <td><button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button></td>
         </tr>
     );
