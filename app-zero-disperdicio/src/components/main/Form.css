@@ -1,10 +1,16 @@
-
-
+#register-product {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 100px;
+    height: 400px;
+}
 form label {
     display: block;
 }
 
-textarea {
+#comments {
     resize: none;
     height: 80px;
 }
@@ -19,6 +25,7 @@ input:focus, button:focus, select:focus, textarea:focus {
 
 .input, .button {
     width: 100%;
+    height: 35px;
     padding: 5px;
     border: 1px solid #B5B2B2;
     border-radius: 5px;
@@ -33,4 +40,62 @@ input:focus, button:focus, select:focus, textarea:focus {
 form .button:hover {
     background-color: #AEABAB;
     transition: background-color ease-in .2s ;
+}
+
+@media(max-width: 399px){
+    #register-product {
+        width: 280px;
+    }
+}
+
+@media(min-width: 400px) and (max-width: 599px){
+    #register-product {
+        width: 350px;
+    }
+}
+
+@media(min-width: 600px){
+
+    #category-container {
+        grid-area: category;
+    }
+
+    #name-container {
+        grid-area: name;
+    }
+
+    #expiration-container {
+        grid-area: expiration;
+    }
+
+    #quantity-container {
+        grid-area: quantity;
+    }
+
+    #comments-container {
+        grid-area: comments;
+    }
+
+    #botao-cadastrar {
+        grid-area: submit;
+    }
+
+    #notifications-alert {
+        justify-content: flex-end;
+        right: 10px;
+    }
+
+    #register-product {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "category name"
+            "expiration quantity"
+            "comments comments"
+            "submit submit"
+        ;
+        width: 80%;
+        height: auto;
+    }
 }

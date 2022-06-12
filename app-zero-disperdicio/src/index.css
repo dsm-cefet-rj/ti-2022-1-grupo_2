@@ -10,6 +10,7 @@ ul > li {
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -22,5 +23,3 @@ body {
   font-size: 1.6rem;
   font-family: 'Inter', sans-serif;
 }
-
-/* --------------------- MEDIA QUERIES ----------------------- */

@@ -3,11 +3,11 @@
     align-items: center;
     position: relative;
     right: 10px;
-    cursor: pointer;
 }
 
 #bell-container {
     position: relative;
+    cursor: pointer;
 }
 
 #bell {

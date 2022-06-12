@@ -1,14 +1,24 @@
 #header {
-    display: flex;
-    align-items: center;
-    height: 70px;
-    background-color: #88EB95;
-    margin-bottom: 20px;
-  }
-  
-  #header-items {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background-color: #88EB95;
+  margin-bottom: 20px;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+
+#header-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header > #header-items {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr 1fr;
+  gap: 10px;
+}

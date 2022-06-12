@@ -17,14 +17,14 @@
     background-color: #f5f5f5;
 }
 
-@media(min-width: 360px){
+@media(min-width: 300px){
     .container {
         max-width: 85%;
         margin: 0 auto;
     }
 }
 
-@media(min-width: 768px){
+/* @media(min-width: 768px){
 
     #category-container {
         grid-area: category;
@@ -191,9 +191,9 @@
         font-weight: 700;
         padding: 8px 0;
     }
-}
+} */
 
-@media(min-width: 400px) and (max-width: 799px){
+/* @media(min-width: 400px) and (max-width: 799px){
     #accordion-container {
         width: 350px;
     }
@@ -275,4 +275,4 @@
         font-weight: 700;
         padding: 8px 0;
     }
-}
+} */
