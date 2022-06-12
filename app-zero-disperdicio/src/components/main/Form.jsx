@@ -23,7 +23,7 @@ export default function Form() {
     );
 
     function handleInputChange(e) {
-        setProduct({ ...product, [e.target.nome]: e.target.value });
+        setProduct({ ...product, [e.target.name]: e.target.value });
     }
 
     function handleSubmit(e) {
