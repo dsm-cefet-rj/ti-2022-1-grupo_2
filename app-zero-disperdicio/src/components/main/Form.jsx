@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './Form.css';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addProjeto, updateProjeto } from './ProjetoSlice';
+import { addProjeto, updateProjeto/* , updateProjetoServer */ } from './ProjetoSlice';
 
 export default function Form() {
     const projeto = useSelector(state => state.projeto);
+    // const projeto = useSelector(state => state.projeto.projeto);
 
     const dispatch = useDispatch();
     let { id } = useParams();
@@ -34,6 +35,15 @@ export default function Form() {
             dispatch(updateProjeto(product));
         }
     }
+
+    /* function handleSubmit(e) {
+        e.preventDefault();
+        if (actiontype === 'projeto/addProjeto') {
+            dispatch(addProjeto(product));
+        } else {
+            dispatch(updateProjetoServer(product));
+        }
+    } */
 
     return (
         <form action="#" id="register-product" onSubmit={handleSubmit} >
