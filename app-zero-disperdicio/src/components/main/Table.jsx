@@ -1,11 +1,18 @@
-import React from 'react';
+import React/* , {useEffect} */ from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteProjeto } from './ProjetoSlice';
+import { deleteProjeto/* , fetchProjeto */ } from './ProjetoSlice';
+
+
 
 export default function ListagemTabela(props) {
 
     const projeto = useSelector(state => state.projeto);
+    //const projetoState = useSelector(state => state.projeto.projeto);
+    //const projeto = projetoState.projeto;
+    //const status = projetoState.status;
+    //const error = projetoState.error;
+
     const dispatch = useDispatch();
 
 
@@ -13,8 +20,26 @@ export default function ListagemTabela(props) {
         dispatch(deleteProjeto(id));
     }
 
+    /* useEffect(() => {
+        if(status === 'not_loaded'){
+            dispatch(fetchProjeto());
+        }
+    }, [status, dispatch]) */
+
+    /* let Tabela = '';
+    if(status === 'loaded'){
+        Tabela = <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
+    }
+    else if(status === 'loading'){
+        Tabela = <div>Carregando os produtos...</div>;
+    }
+    else if(status === 'failed'){
+        Tabela = <div>Erro: {error}</div>;
+    } */
+
     return (
         <>
+    {/*{Tabela}*/}   
             <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
         </>
     );
