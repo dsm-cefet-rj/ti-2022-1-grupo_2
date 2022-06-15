@@ -1,46 +1,51 @@
-import React/* , {useEffect} */ from 'react';
+import React , {useEffect}  from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteProjeto/* , fetchProjeto */ } from './ProjetoSlice';
+import { deleteProjetoServer , fetchProjeto, selectedAllProjeto} from './ProjetoSlice';
+//import { deleteProjeto} from './ProjetoSlice';
 
 
 
 export default function ListagemTabela(props) {
 
-    const projeto = useSelector(state => state.projeto);
-    //const projetoState = useSelector(state => state.projeto.projeto);
-    //const projeto = projetoState.projeto;
-    //const status = projetoState.status;
-    //const error = projetoState.error;
+    //const projeto = useSelector(state => state.projeto);
+
+    const projeto = useSelector(selectedAllProjeto);
+    const status = useSelector(state => state.projeto.status);
+    const error = useSelector(state => state.projeto.error);
 
     const dispatch = useDispatch();
 
 
-    function handleClickExcluirProjeto(id) {
+    /* function handleClickExcluirProjeto(id) {
         dispatch(deleteProjeto(id));
-    }
+    } */
+    
+     function handleClickExcluirProjeto(id) {
+        dispatch(deleteProjetoServer(id));
+    } 
 
-    /* useEffect(() => {
+     useEffect(() => {
         if(status === 'not_loaded'){
             dispatch(fetchProjeto());
         }
-    }, [status, dispatch]) */
+    }, [status, dispatch]) 
 
-    /* let Tabela = '';
-    if(status === 'loaded'){
-        Tabela = <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
+     let Tabela = '';
+    if(status === 'loaded'|| status === 'saved' || status === 'deleted'){
+        Tabela = <Tabelalis projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
     }
     else if(status === 'loading'){
         Tabela = <div>Carregando os produtos...</div>;
     }
     else if(status === 'failed'){
         Tabela = <div>Erro: {error}</div>;
-    } */
+    } 
 
     return (
         <>
-    {/*{Tabela}*/}   
-            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+    {Tabela}   
+            {/* <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */}
         </>
     );
 
@@ -50,7 +55,9 @@ const LinhaTabela = (props) => {
     return (
         <tr>
             <td data-label="nome">
+                <button>
                 <span>{props.projeto.nome}</span>
+                </button>
             </td>
             <td data-label="validade">
                 <span>{props.projeto.dataDeValidade}</span>
@@ -69,7 +76,7 @@ const LinhaTabela = (props) => {
     );
 }
 
-function Tabela(props) {
+function Tabelalis(props) {
     return (
         <table>
             <thead>
