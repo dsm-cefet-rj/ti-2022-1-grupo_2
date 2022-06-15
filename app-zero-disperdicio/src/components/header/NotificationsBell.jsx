@@ -16,8 +16,6 @@ export default function NotificationsBell() {
             const notificationsCount = document.querySelector("#notifications-count")
             const notificationsList = document.querySelector("#notifications-list")
 
-            console.log(e.target)
-
             if(e.target !== bell && e.target !== notificationsCount){
                 if(!notificationsList.contains(e.target)){
                     setOpen(false)
