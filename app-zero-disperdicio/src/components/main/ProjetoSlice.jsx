@@ -4,11 +4,11 @@ import {baseUrl} from '../../baseUrl';
 
 const projetoAdapter = createEntityAdapter();
 
- const initialState = {
+ /* const initialState = {
     status: `not_loaded`,
     error: null
 }; 
-
+ */
  export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async() => {
     return await httpGet(`${baseUrl}/projeto`);
 })
@@ -59,14 +59,14 @@ function deleteProjetoReducer(projeto, id) {
  export const projetoSlice = createSlice({
     name: 'projeto',
     extraReducers: {
-        [fetchProjeto.pending]: (state, action) => {state.status = 'loading'},
+        [fetchProjeto.pending]: (state) => {state.status = 'loading'},
         [fetchProjeto.fulfilled]: (state, action) => {state.status = 'loading'; projetoAdapter.setAll(state, action.payload);},
         [fetchProjeto.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
-        [updateProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+        [updateProjetoServer.pending]: (state) => {state.status = 'loading'},
         [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetoAdapter.upsertOne(state, action.payload);},
-        [addProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+        [addProjetoServer.pending]: (state) => {state.status = 'loading'},
         [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetoAdapter.addOne(state, action.payload);},
-        [deleteProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+        [deleteProjetoServer.pending]: (state) => {state.status = 'loading'},
         [deleteProjetoServer.fulfilled]: (state, action) => {state.status = 'deleted'; projetoAdapter.removeOne(state, action.payload);}
     }
 }); 
