@@ -1,24 +1,40 @@
 import './HorizontalMenu.css'
-import { useRef } from 'react'
+import {useState, useEffect, useRef } from 'react'
 
 export default function HorizontalMenu(){
     const listItems = document.querySelectorAll('.principal-menu > ul > li')
     const underline = useRef(null)
+    const [open, setOpen] = useState(false)
+
+    function openMenu(e){
+        setOpen(!open)
+    }
 
     function itemSelected(pos){
-        console.log(underline.current)
         underline.current.style.transform = `translateX(${100 * pos}%)` 
     }
     listItems.forEach(listItem => listItem.addEventListener('click', itemSelected))
 
-    // useEffect(() => {
+    useEffect(() => {
+        function closedMenu(e){
+            const menu = document.querySelector('.principal-menu')
+            if(!menu.contains(e.target)){
+                setOpen(false)
+            }
+        }
+        document.addEventListener('click', closedMenu)
 
-    //     return () => listItems.forEach(listItem => listItem.removeEventListener('click', itemSelected))
-    // })
+        return () => document.removeEventListener('click', closedMenu)
+    })
     
     return(
         <nav className="principal-menu">
-            <ul>
+            <div class={open ? "icon-menu icon-menu-closed" : "icon-menu"} onClick={(e) => openMenu(e)}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul className={open ? "openMenu" : ""}>
                 <div className="underline" ref={underline}></div>
                 <li onClick={() => itemSelected(0)}><a href="#home">Home</a></li>
                 <li onClick={() => itemSelected(1)}><a href="#geladeira">Geladeira</a></li>

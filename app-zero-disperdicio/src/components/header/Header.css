@@ -17,8 +17,46 @@
   align-items: center;
 }
 
-#header > #header-items {
+#header-items {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr 1fr;
+  grid-template-columns: 1fr 6fr 1fr 1fr;
   gap: 10px;
+}
+
+@media(max-width: 1099px){
+  #header-items {
+    display: flex;
+  }
+}
+
+@media(max-width: 500px){
+  #header h1 {
+    font-size: 2rem;
+  }
+
+  #login-icon > img{
+    width: 55%;
+  }
+
+  #bell-container > #bell {
+    width: 20px;
+    height: 20px;
+  }
+
+  #bell-container > #notifications-count {
+    width: 20px;
+    height: 20px;
+    top: -8px;
+    left: 11px;
+    font-size: 1rem;
+  }
+
+  #user-actions > #user-options {
+    bottom: -70px;
+  }
+
+  #notifications-alert > #notifications-list {
+    top: 30px;
+    right: 0px;
+  }
 }
