@@ -2,6 +2,7 @@ import React from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteProjeto } from './ProjetoSlice';
+import {Link} from 'react-router-dom';
 
 export default function ListagemTabela(props) {
 
@@ -25,7 +26,8 @@ const LinhaTabela = (props) => {
     return (
         <tr>
             <td data-label="nome">
-                <span>{props.projeto.nome}</span>
+               {/* <button> <span>{props.projeto.nome}</span></button> */}
+               <button><Link to="/forme"><span>{props.projeto.nome}</span></Link> </button>
             </td>
             <td data-label="validade">
                 <span>{props.projeto.dataDeValidade}</span>
@@ -36,7 +38,7 @@ const LinhaTabela = (props) => {
             <td data-label="comentários">
                 <span>{props.projeto.comentarios}</span>
             </td>
-            <td class="btn-container">
+            <td className="btn-container">
                 <button id="update" className="button">Atualizar</button>
                 <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
             </td>
