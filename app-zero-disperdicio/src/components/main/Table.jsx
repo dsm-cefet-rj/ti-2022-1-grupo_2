@@ -1,24 +1,58 @@
-import React from 'react';
+import React , {useEffect}  from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { deleteProjeto } from './ProjetoSlice';
 import {Link} from 'react-router-dom';
+=======
+import { deleteProjetoServer , fetchProjeto, selectedAllProjeto} from './ProjetoSlice';
+//import { deleteProjeto} from './ProjetoSlice';
+
+
+
 
 export default function ListagemTabela(props) {
 
-    const projeto = useSelector(state => state.projeto);
+    //const projeto = useSelector(state => state.projeto);
+
+    const projeto = useSelector(selectedAllProjeto);
+    const status = useSelector(state => state.projeto.status);
+    const error = useSelector(state => state.projeto.error);
+
     const dispatch = useDispatch();
 
 
-    function handleClickExcluirProjeto(id) {
+    /* function handleClickExcluirProjeto(id) {
         dispatch(deleteProjeto(id));
+    } */
+    
+     function handleClickExcluirProjeto(id) {
+        dispatch(deleteProjetoServer(id));
+    } 
+
+     useEffect(() => {
+        if(status === 'not_loaded'){
+            dispatch(fetchProjeto());
+        }
+    }, [status, dispatch]) 
+
+      let Tabel = '';
+    if(status === 'loaded'|| status === 'saved' || status === 'deleted'){
+        Tabel = <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
     }
+    else if(status === 'loading'){
+        Tabel = <div>Carregando os produtos...</div>;
+    }
+    else if(status === 'failed'){
+        Tabel = <div>Erro: {error}</div>;
+    }  
 
     return (
         <>
-            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+     {Tabel}    
+            {/*  <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */} 
         </>
-    );
+    ); 
 
 }
 
@@ -26,8 +60,14 @@ const LinhaTabela = (props) => {
     return (
         <tr>
             <td data-label="nome">
+
                {/* <button> <span>{props.projeto.nome}</span></button> */}
                <button><Link to="/forme"><span>{props.projeto.nome}</span></Link> </button>
+=======
+                <button>
+                <span>{props.projeto.nome}</span>
+                </button>
+
             </td>
             <td data-label="validade">
                 <span>{props.projeto.dataDeValidade}</span>
