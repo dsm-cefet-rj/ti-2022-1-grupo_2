@@ -4,11 +4,11 @@ import {baseUrl} from '../../baseUrl';
 
 const projetoAdapter = createEntityAdapter();
 
- /* const initialState = {
+  const initialState = projetoAdapter.getInitialState ({
     status: `not_loaded`,
     error: null
-}; 
- */
+}); 
+ 
  export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async() => {
     return await httpGet(`${baseUrl}/projeto`);
 })
@@ -58,6 +58,7 @@ function deleteProjetoReducer(projeto, id) {
 
  export const projetoSlice = createSlice({
     name: 'projeto',
+    initialState: initialState, 
     extraReducers: {
         [fetchProjeto.pending]: (state) => {state.status = 'loading'},
         [fetchProjeto.fulfilled]: (state, action) => {state.status = 'loading'; projetoAdapter.setAll(state, action.payload);},
@@ -76,6 +77,6 @@ export default projetoSlice.reducer;
 
  export const {
     selectedAll: selectedAllProjeto,
-    selectedById: selectedByIdProjeto,
-    selectedIds: selectedIdsProjeto
+    selectedById: selectedProjetoById,
+    selectedIds: selectedProjetoIds
 } = projetoAdapter.getSelectors(state => state.projeto) 

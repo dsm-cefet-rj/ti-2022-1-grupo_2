@@ -1,4 +1,4 @@
-import {string, object, number, setLocale} from 'yup';
+/* import {string, object, number, setLocale} from 'yup';
 import {ptForm} from 'yup-locale-pt';
 
 setLocale(ptForm)
@@ -13,3 +13,4 @@ export let projetoSchema = object().shape(
 
     }
 )
+ */
