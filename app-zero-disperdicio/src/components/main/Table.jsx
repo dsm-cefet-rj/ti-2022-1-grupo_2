@@ -31,23 +31,23 @@ export default function ListagemTabela(props) {
         }
     }, [status, dispatch]) 
 
-     let Tabela = '';
+      let Tabel = '';
     if(status === 'loaded'|| status === 'saved' || status === 'deleted'){
-        Tabela = <Tabelalis projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
+        Tabel = <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
     }
     else if(status === 'loading'){
-        Tabela = <div>Carregando os produtos...</div>;
+        Tabel = <div>Carregando os produtos...</div>;
     }
     else if(status === 'failed'){
-        Tabela = <div>Erro: {error}</div>;
-    } 
+        Tabel = <div>Erro: {error}</div>;
+    }  
 
     return (
         <>
-    {Tabela}   
-            {/* <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */}
+     {Tabel}    
+            {/*  <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */} 
         </>
-    );
+    ); 
 
 }
 
@@ -76,7 +76,7 @@ const LinhaTabela = (props) => {
     );
 }
 
-function Tabelalis(props) {
+function Tabela(props) {
     return (
         <table>
             <thead>
