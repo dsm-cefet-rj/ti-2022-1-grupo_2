@@ -54,17 +54,17 @@ export default function Form() {
 
             <div id="name-container">
                 <label htmlFor="name-product">Nome do produto</label>
-                <input type="text" className="input" id="name-product" name="nome" value={product.nome} placeholder="Nome do produto" onChange={handleInputChange} />
+                <input type="text" className="input" id="name-product" name="nome" value={product.nome} placeholder="Nome do produto" onChange={handleInputChange} required />
             </div>
 
             <div id="expiration-container">
                 <label htmlFor="expiration-date">Data de validade</label>
-                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade} onChange={handleInputChange} />
+                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade} onChange={handleInputChange} required />
             </div>
 
             <div id="quantity-container">
                 <label htmlFor="quantity">Quantidade</label>
-                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade} onChange={handleInputChange} />
+                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade} onChange={handleInputChange} required />
             </div>
 
             <div id="comments-container">

@@ -5,24 +5,25 @@ import Accordion from './Accordion'
 import './Main.css'
 //import { Provider } from 'react-redux';
 //import store from './store';
-function Routeamento(){
-    return(
-        <BrowserRouter>
-            <Routes>  
-                <Route path="forme" element = {<Form />}/>
-            </Routes>
-        </BrowserRouter>
+function Routeamento(props){
+    return( <Routes>
+                <Route path="forme" element = {<Form projeto={props.projeto} setProjeto={props.setProjeto} />}/>
+                </Routes>
     )
 }
 
 export default function Main(props){
     return(
-        <main className="container">
-            <Form projeto={props.projeto} setProjeto={props.setProjeto} />
-            {/* <Provider store={store}> */}
-            <Routeamento />
-            <Accordion/>
-            <Alert/>
-        </main>
+        <BrowserRouter>
+   
+            <main className="container">
+            
+                 <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
+                <Routeamento />
+                <Accordion/>
+                <Alert/>
+            </main>
+        
+        </BrowserRouter>
     )
 }
