@@ -2,21 +2,30 @@ import React from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteProjeto } from './ProjetoSlice';
-import {Link} from 'react-router-dom';
+import {Link, Route, Routes} from 'react-router-dom';
+
 
 export default function ListagemTabela(props) {
 
     const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
-
-
+  
     function handleClickExcluirProjeto(id) {
         dispatch(deleteProjeto(id));
+    }
+    
+    function Tabee() {
+        return(
+        <Routes>
+            <Route path='/success' element={<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />} />
+        </Routes>
+        )
     }
 
     return (
         <>
             <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
+            <Tabee />
         </>
     );
 
@@ -27,7 +36,7 @@ const LinhaTabela = (props) => {
         <tr>
             <td data-label="nome">
                {/* <button> <span>{props.projeto.nome}</span></button> */}
-               <button><Link to="/forme"><span>{props.projeto.nome}</span></Link> </button>
+               <button><Link to={`/forme/${props.projeto.id}`}><span>{props.projeto.nome}</span></Link> </button>
             </td>
             <td data-label="validade">
                 <span>{props.projeto.dataDeValidade}</span>

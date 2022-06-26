@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Form.css';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProjeto, updateProjeto } from './ProjetoSlice';
 
@@ -10,7 +10,7 @@ export default function Form() {
     const dispatch = useDispatch();
      let { id } = useParams();
     id = parseInt(id);
-    
+    let navigate = useNavigate();
 
     const [product, setProduct] = useState(
         id ? projeto.filter((p) => p.id === id)[0] ?? {} : {});
@@ -35,8 +35,9 @@ export default function Form() {
             dispatch(addProjeto(product));
         } else {
             dispatch(updateProjeto(product));
+            
         }
-       
+         navigate("/success"/* , { replace: true } */);
     }
 
     return (
@@ -72,7 +73,7 @@ export default function Form() {
                 <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios} onChange={handleInputChange}></textarea>
             </div>
 
-            <input id="botao-cadastrar" className="button" type="submit" value="salvar" />
+            <input id="botao-cadastrar" className="button" type="submit" value="salvar"/>
         </form>
     )
 }   

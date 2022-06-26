@@ -6,9 +6,10 @@ import './Main.css'
 //import { Provider } from 'react-redux';
 //import store from './store';
 function Routeamento(props){
-    return( <Routes>
-                <Route path="forme" element = {<Form projeto={props.projeto} setProjeto={props.setProjeto} />}/>
-                </Routes>
+    return( 
+        <Routes>
+            <Route path='forme/:id' element = {<Form projeto={props.projeto} setProjeto={props.setProjeto} />}/>
+        </Routes>
     )
 }
 
@@ -18,7 +19,7 @@ export default function Main(props){
    
             <main className="container">
             
-                 <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
+                <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
                 <Routeamento />
                 <Accordion/>
                 <Alert/>
