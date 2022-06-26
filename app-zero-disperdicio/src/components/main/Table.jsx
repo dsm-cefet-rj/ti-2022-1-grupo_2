@@ -5,9 +5,13 @@ import { deleteProjeto } from './ProjetoSlice';
 import {Link, Route, Routes} from 'react-router-dom';
 
 
-export default function ListagemTabela(props) {
-
-    const projeto = useSelector(state => state.projeto);
+export default function ListagemTabela() {
+   
+    /* const projetoState = useSelector(state => state.projeto);
+    const projeto = projetoState.projeto;
+    const status = projetoState.status;
+    const error = projetoState.error; */
+    const projeto = useSelector(state => state.projeto.projeto);
     const dispatch = useDispatch();
   
     function handleClickExcluirProjeto(id) {
@@ -48,7 +52,7 @@ const LinhaTabela = (props) => {
                 <span>{props.projeto.comentarios}</span>
             </td>
             <td className="btn-container">
-                <button id="update" className="button">Atualizar</button>
+                {/* <button id="update" className="button">Atualizar</button> */}
                 <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
             </td>
         </tr>

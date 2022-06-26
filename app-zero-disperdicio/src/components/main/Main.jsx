@@ -3,8 +3,7 @@ import Form from './Form';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Accordion from './Accordion'
 import './Main.css'
-//import { Provider } from 'react-redux';
-//import store from './store';
+
 function Routeamento(props){
     return( 
         <Routes>

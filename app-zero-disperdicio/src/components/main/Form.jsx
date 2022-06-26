@@ -6,7 +6,8 @@ import { addProjeto, updateProjeto } from './ProjetoSlice';
 
 export default function Form() {
     
-    const projeto = useSelector(state => state.projeto);
+    const projeto = useSelector(state => state.projeto.projeto);
+  //  const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
      let { id } = useParams();
     id = parseInt(id);
@@ -44,7 +45,7 @@ export default function Form() {
         <form action="#" id="register-product" onSubmit={handleSubmit} >
             <div id="category-container">
                 <label htmlFor="produtct-category">Categoria</label>
-                <select id="produtct-category" className="input" name="category">
+                <select id="produtct-category" className="input" name="category" required >
                     <option value="disabled">Selecione</option>
                     <option value="geladeira">Geladeira</option>
                     <option value="armário">Armário</option>
