@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
 import './Form.css';
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addProjetoServer, updateProjetoServer, selectAllProjeto } from './ProjetoSlice';
+import { addProjetoServer, updateProjetoServer, selectProjetoById } from './ProjetoSlice';
 
 export default function Form() {
-    const projeto = useSelector(selectAllProjeto);
-    //const projeto = useSelector(state => state.projeto.projeto);
-  //  const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
     let { id } = useParams();
     id = parseInt(id);
     let navigate = useNavigate();
 
+    const projetoFound = useSelector(state => selectProjetoById(state, id));
+
     const [product, setProduct] = useState(
-        id ? projeto.filter((p) => p.id === id)[0] ?? {} : {}
+        id ? projetoFound ?? {} : {}
     );
 
-    const [actiontype,] = useState(
+    const [actiontype] = useState(
         id ?
-            projeto.filter((p) => p.id === id)[0]
+            projetoFound
                 ? 'projeto/updateProjeto'
                 : 'projeto/addProjeto'
                 : 'projeto/addProjeto'
     );
-
-
 
     function handleInputChange(e) {
         setProduct({ ...product, [e.target.name]: e.target.value });
@@ -37,9 +34,9 @@ export default function Form() {
             dispatch(addProjetoServer(product));
         } else {
             dispatch(updateProjetoServer(product));
-            
+
         }
-         navigate('/success'/* , { replace: true } */);
+        // navigate('/success'/* , { replace: true } */);
     }
 
     return (
@@ -75,7 +72,7 @@ export default function Form() {
                 <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios || ''} onChange={handleInputChange}></textarea>
             </div>
 
-            <input id="botao-cadastrar" className="button" type="submit" value="salvar" />
+            <input id="botao-cadastrar" className="button" type="submit" value="Cadastrar" />
         </form>
     )
 }   

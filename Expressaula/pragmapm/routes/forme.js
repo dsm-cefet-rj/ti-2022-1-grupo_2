@@ -7,10 +7,18 @@ const Produto = mongoose.model('produtos')
 
 router.use(bodyParser.json());
 
+// Listar Produto(s)
 router.get('/produtos', (req, res) => {
-    
+    Produto.find()
+        .then(produtos => {
+            res.send(produtos)
+        })
+        .catch(err => {
+            console.log('Erro ao listar produtos', err)
+        })
 })
 
+// Cadastrar Produto
 router.post('/salvar', (req, res) => {
     const novoProduto = {
         categoria: req.body.category,
@@ -20,8 +28,7 @@ router.post('/salvar', (req, res) => {
         comentario: req.body.comentarios
     }
 
-    new Produto(novoProduto)
-        .save()
+    new Produto(novoProduto).save()
         .then(() => {
             console.log('Produto salvo com sucesso!')
         })
@@ -30,10 +37,23 @@ router.post('/salvar', (req, res) => {
         })
 })
 
-router.post('/deletar', (req, res) => {
-    Produto.remove({_id: req.body.id})
+// Buscar produto pelo ID
+router.get('/produtos/:id', (req, res) => {
+    Produto.findById({_id: req.params.id})
+        .then(produto => {
+            console.log('Buscando produto pelo ID com sucesso!')
+            res.send(produto)
+        })
+        .catch(err => {
+            console.log('Erro ao busca produto pelo ID: ' + err)
+        })
+})
+
+// Deletar produto pelo ID
+router.delete('/deletar/:id', (req, res) => {
+    Produto.remove({_id: req.params.id})
         .then(() => {
-            console.log('Produto deletado com sucesso')
+            console.log('Produto deletado com sucesso!')
         })
         .catch(err => {
             console.log('Erro ao deletar o produto: ' + err)

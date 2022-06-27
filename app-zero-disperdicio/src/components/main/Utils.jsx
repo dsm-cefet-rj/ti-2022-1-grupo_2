@@ -1,5 +1,5 @@
-async function client(endpoint, {body, ...customConfig} = {}){
-    const headers = {'Content - Type': 'application/json'}
+async function client(endpoint, { body, ...customConfig } = {}) {
+    const headers = { 'Content-Type': 'application/json' }
 
     const config = {
         method: body ? `POST` : `GET`,
@@ -11,35 +11,35 @@ async function client(endpoint, {body, ...customConfig} = {}){
     }
 
 
-if (body){
-    config.body = JSON.stringify(body)
-}
-
-let data 
-try {
-    const response = await window.fetch(endpoint, config)
-    data = await response.json()
-    if(response.ok) {
-        return data
+    if (body) {
+        config.body = JSON.stringify(body)
     }
-    throw new Error(response.statusText)
-} catch(err) {
-    return Promise.reject(err.message ? err.message : data)
-}
+
+    let data
+    try {
+        const response = await window.fetch(endpoint, config)
+        data = await response.json()
+        if (response.ok) {
+            return data
+        }
+        throw new Error(response.statusText)
+    } catch (err) {
+        return Promise.reject(err.message ? err.message : data)
+    }
 }
 
 export const httpGet = async function (endpoint, customConfig = {}) {
-    return client(endpoint, {...customConfig, method: `GET`})
+    return client(endpoint, { ...customConfig, method: `GET` })
 }
 
 export const httpPost = async function (endpoint, body, customConfig = {}) {
-    return client(endpoint, {body, ...customConfig, method: `POST`})
+    return client(endpoint, { body, ...customConfig, method: `POST` })
 }
 
 export const httpPut = async function (endpoint, body, customConfig = {}) {
-    return client(endpoint, {body, ...customConfig, method: `PUT`})
+    return client(endpoint, { body, ...customConfig, method: `PUT` })
 }
 
 export const httpDelete = async function (endpoint, customConfig = {}) {
-    return client(endpoint, {...customConfig, method: `DELETE`})
+    return client(endpoint, { ...customConfig, method: `DELETE` })
 }
