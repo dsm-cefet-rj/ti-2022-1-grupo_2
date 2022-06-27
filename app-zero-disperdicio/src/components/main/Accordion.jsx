@@ -2,10 +2,6 @@ import './Accordion.css'
 import ListagemTabela from './Table';
 import { Provider } from 'react-redux';
 import store from './store';
-/* import {fetchProjeto} from './ProjetoSlice';
-
-store.dispatch(fetchProjeto());
- */
   
 const Accordion = () => {
     return (

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './Form.css';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addProjeto, updateProjeto } from './ProjetoSlice';
+import { addProjetoServer, updateProjetoServer, selectAllProjeto } from './ProjetoSlice';
 
 export default function Form() {
-
-    const projeto = useSelector(state => state.projeto.projeto);
-    //  const projeto = useSelector(state => state.projeto);
+    const projeto = useSelector(selectAllProjeto);
+    //const projeto = useSelector(state => state.projeto.projeto);
+  //  const projeto = useSelector(state => state.projeto);
     const dispatch = useDispatch();
     let { id } = useParams();
     id = parseInt(id);
@@ -34,12 +34,12 @@ export default function Form() {
     function handleSubmit(e) {
         e.preventDefault();
         if (actiontype === 'projeto/addProjeto') {
-            dispatch(addProjeto(product));
+            dispatch(addProjetoServer(product));
         } else {
-            dispatch(updateProjeto(product));
-
+            dispatch(updateProjetoServer(product));
+            
         }
-        navigate("/success"/* , { replace: true } */);
+         navigate('/success'/* , { replace: true } */);
     }
 
     return (
@@ -57,22 +57,22 @@ export default function Form() {
 
             <div id="name-container">
                 <label htmlFor="name-product">Nome do produto</label>
-                <input type="text" className="input" id="name-product" name="nome" value={product.nome} placeholder="Nome do produto" onChange={handleInputChange} required />
+                <input type="text" className="input" id="name-product" name="nome" value={product.nome || ''} placeholder="Nome do produto" onChange={handleInputChange} required />
             </div>
 
             <div id="expiration-container">
                 <label htmlFor="expiration-date">Data de validade</label>
-                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade} onChange={handleInputChange} required />
+                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade || ''} onChange={handleInputChange} required />
             </div>
 
             <div id="quantity-container">
                 <label htmlFor="quantity">Quantidade</label>
-                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade} onChange={handleInputChange} required />
+                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade || ''} onChange={handleInputChange} required />
             </div>
 
             <div id="comments-container">
                 <label htmlFor="comments">Comentários</label>
-                <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios} onChange={handleInputChange}></textarea>
+                <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios || ''} onChange={handleInputChange}></textarea>
             </div>
 
             <input id="botao-cadastrar" className="button" type="submit" value="salvar" />
