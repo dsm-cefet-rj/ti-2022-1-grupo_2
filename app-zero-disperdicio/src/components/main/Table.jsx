@@ -1,35 +1,56 @@
-import React from 'react';
+import React , {useEffect}  from 'react';
 import './Table.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteProjeto } from './ProjetoSlice';
+import { useSelector, useDispatch} from 'react-redux';
+import { deleteProjetoServer , fetchProjeto , selectAllProjeto } from './ProjetoSlice';
 import {Link, Route, Routes} from 'react-router-dom';
 
 
 export default function ListagemTabela() {
+    const projeto = useSelector(selectAllProjeto);
+    const status = useSelector(state => state.projeto.status);
+    const error = useSelector(state => state.projeto.error);
    
     /* const projetoState = useSelector(state => state.projeto);
     const projeto = projetoState.projeto;
     const status = projetoState.status;
-    const error = projetoState.error; */
-    const projeto = useSelector(state => state.projeto.projeto);
+    const error = projetoState.error; */ 
+    //const projeto = useSelector(state => state.projeto.projeto);
     const dispatch = useDispatch();
   
     function handleClickExcluirProjeto(id) {
-        dispatch(deleteProjeto(id));
+        dispatch(deleteProjetoServer(id));
     }
     
-    function Tabee() {
+     function Tabee(){
         return(
         <Routes>
             <Route path='/success' element={<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />} />
         </Routes>
-        )
+        );
+    } 
+     
+     useEffect(() => {
+       if(status === 'not_loaded'){
+           dispatch(fetchProjeto());
+        }
+    }, [status, dispatch])  
+
+    let tabela = '';
+    if(status === 'loaded'|| status === 'saved' || status === 'deleted'){
+        tabela = (<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> || <Tabee />);
+        
+    }
+    else if(status === 'loading'){
+        tabela = <div>Carregando os produtos...</div>;
+    }
+    else if(status === 'failed'){
+        tabela = <div>Erro: {error}</div>;
     }
 
     return (
         <>
-            <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />
-            <Tabee />
+            {tabela}
+            {/* <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */}
         </>
     );
 
