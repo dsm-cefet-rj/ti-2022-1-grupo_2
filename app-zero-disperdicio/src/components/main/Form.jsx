@@ -36,14 +36,14 @@ export default function Form() {
             dispatch(updateProjetoServer(product));
 
         }
-        // navigate('/success'/* , { replace: true } */);
+        navigate('/success'/* , { replace: true } */);
     }
 
     return (
         <form action="#" id="register-product" onSubmit={handleSubmit} >
             <div id="category-container">
-                <label htmlFor="produtct-category">Categoria</label>
-                <select id="produtct-category" className="input" name="category" required >
+                <label htmlFor="product-category">Categoria</label>
+                <select id="product-category" className="input" name="category" required >
                     <option value="disabled">Selecione</option>
                     <option value="geladeira">Geladeira</option>
                     <option value="armário">Armário</option>

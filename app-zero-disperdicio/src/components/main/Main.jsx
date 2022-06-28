@@ -3,6 +3,7 @@ import Form from './Form';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Accordion from './Accordion'
 import './Main.css'
+import ModalAtualizar from './ModalAtualizar';
 
 function Routeamento(props){
     return( 
@@ -22,6 +23,7 @@ export default function Main(props){
                 <Routeamento />
                 <Accordion/>
                 <Alert/>
+                <ModalAtualizar/>
             </main>
         
         </BrowserRouter>

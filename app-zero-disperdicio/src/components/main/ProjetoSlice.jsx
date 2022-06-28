@@ -85,9 +85,11 @@ export const projetoSlice = createSlice({
         [fetchProjeto.pending]: (state) => {state.status = 'loading'},
         [fetchProjeto.fulfilled]: (state, action) => {state.status = 'loaded'; projetoAdapter.setAll(state, action.payload);},
         [fetchProjeto.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
-        //[updateProjetoServer.pending]: (state) => {state.status = 'loading'},
+        [updateProjetoServer.pending]: (state) => {state.status = 'loading'},
         [updateProjetoServer.fulfilled]: (state, action) => {state.status= 'saved'; projetoAdapter.upsertOne(state, action.payload);},
+        [addProjetoServer.pending]: (state) => {state.status = 'loading'},
         [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetoAdapter.addOne(state, action.payload);},
+        [deleteProjetoServer.pending]: (state) => {state.status = 'loading'},
         [deleteProjetoServer.fulfilled]: (state, action) => {state.status = 'deleted'; projetoAdapter.removeOne(state, action.payload);}
 
     } 
