@@ -64,16 +64,16 @@ const LinhaTabela = (props) => {
     return (
         <tr>
             <td data-label="nome">
-                <button><Link to={`/forme/${props.projeto.id}`}><span>{props.projeto.nome}</span></Link></button>
+                <button><Link to={`/forme/${props.projeto.id}`}><span>{props.projeto.nomeProduto}</span></Link></button>
             </td>
             <td data-label="validade">
-                <span>{props.projeto.dataDeValidade}</span>
+                <span>{props.projeto.dataValidade}</span>
             </td>
             <td data-label="quantidade">
                 <span>{props.projeto.quantidade}</span>
             </td>
             <td data-label="comentários">
-                <span>{props.projeto.comentarios}</span>
+                <span>{props.projeto.comentario}</span>
             </td>
             <td className="btn-container">
                 {/* <button id="update" className="button" onClick={(e) => atualizarProduto(e)}>Atualizar</button> */}

@@ -23,7 +23,7 @@ export default function Main(props){
                 <Routeamento />
                 <Accordion/>
                 <Alert/>
-                <ModalAtualizar/>
+                {/* <ModalAtualizar/> */}
             </main>
         
         </BrowserRouter>

@@ -33,6 +33,7 @@ export default function Form() {
         if (actiontype === 'projeto/addProjeto') {
             dispatch(addProjetoServer(product));
         } else {
+            console.log(product)
             dispatch(updateProjetoServer(product));
 
         }
@@ -43,7 +44,7 @@ export default function Form() {
         <form action="#" id="register-product" onSubmit={handleSubmit} >
             <div id="category-container">
                 <label htmlFor="product-category">Categoria</label>
-                <select id="product-category" className="input" name="category" required >
+                <select id="product-category" className="input" name="category" value={product.category || ''} onChange={handleInputChange} required >
                     <option value="disabled">Selecione</option>
                     <option value="geladeira">Geladeira</option>
                     <option value="armário">Armário</option>

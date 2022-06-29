@@ -12,6 +12,14 @@
       "dataDeValidade": "2022-06-04",
       "id": 2,
       "comentarios": "jnnuiiuiuhiu"
+    },
+    {
+      "category": "geladeira",
+      "nome": "Coca-Cola",
+      "dataDeValidade": "2022-06-30",
+      "quantidade": "4",
+      "comentarios": "mimiomoomoi",
+      "id": 3
     }
   ]
 }
