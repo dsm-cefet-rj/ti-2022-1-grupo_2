@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema
 
 const Produto = new Schema({
@@ -22,5 +23,13 @@ const Produto = new Schema({
         type: String
     }
 })
+
+Produto.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+Produto.set('toJSON', {
+    virtuals: true
+});
 
 mongoose.model('produtos', Produto)
