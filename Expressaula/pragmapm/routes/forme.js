@@ -11,7 +11,7 @@ router.use(bodyParser.json());
 router.get('/produtos', (req, res) => {
     Produto.find()
         .then(produtos => {
-            res.send(produtos)
+            res.json(produtos)
         })
         .catch(err => {
             console.log('Erro ao listar produtos', err)
@@ -30,7 +30,7 @@ router.post('/produtos/salvar', (req, res) => {
     new Produto(novoProduto).save()
         .then(produto => {
             console.log('Produto salvo com sucesso!')
-            res.send('Criado')
+            res.json(produto)
             // res.send(produto);
         })
         .catch(err => {
@@ -62,9 +62,9 @@ router.put('/produtos/atualizar/:id', (req, res) => {
             produto.comentario = req.body.comentarios
 
             produto.save()
-                .then(() => {
+                .then(produto => {
                     console.log('Produto atualizado com sucesso: ')
-                    res.send('Atualizado')
+                    res.json(produto)
                 })
                 .catch(err => {
                     console.log('Houve um erro ao salvar o produto: ' + err)
@@ -78,9 +78,9 @@ router.put('/produtos/atualizar/:id', (req, res) => {
 // Deletar produto pelo ID
 router.delete('/produtos/deletar/:id', (req, res) => {
     Produto.deleteOne({_id: req.params.id})
-        .then(() => {
+        .then(produto => {
             console.log('Produto deletado com sucesso!')
-            res.send('Deletado')
+            res.json(produto)
         })
         .catch(err => {
             console.log('Erro ao deletar o produto: ' + err)

@@ -63,8 +63,8 @@ export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async() => 
 
 export const deleteProjetoServer = createAsyncThunk('projeto/deleteProjetoServer', async(idProduct) => {
     // await httpDelete(`${baseUrl}/projeto/${idProduct}`);
-    return await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`);
-    // return idProduct;
+    await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`);
+    return idProduct;
 })
 
 export const addProjetoServer = createAsyncThunk('projeto/addProjetoServer', async(product) => {
@@ -86,15 +86,39 @@ export const projetoSlice = createSlice({
         deleteProjeto: (state, action) => deleteProjetoReducer(state, action.payload)
     } , */
     extraReducers:{
-        [fetchProjeto.pending]: (state) => {state.status = 'loading'},
-        [fetchProjeto.fulfilled]: (state, action) => {state.status = 'loaded'; projetoAdapter.setAll(state, action.payload);},
-        [fetchProjeto.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
-        [updateProjetoServer.pending]: (state) => {state.status = 'loading'},
-        [updateProjetoServer.fulfilled]: (state, action) => {state.status= 'saved'; projetoAdapter.upsertOne(state, action.payload);},
-        [addProjetoServer.pending]: (state) => {state.status = 'loading'},
-        [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetoAdapter.addOne(state, action.payload);},
-        [deleteProjetoServer.pending]: (state) => {state.status = 'loading'},
-        [deleteProjetoServer.fulfilled]: (state, action) => {state.status = 'deleted'; projetoAdapter.removeOne(state, action.payload);}
+        [fetchProjeto.pending]: (state) => {
+            state.status = 'loading'
+        },
+        [fetchProjeto.fulfilled]: (state, action) => {
+            state.status = 'loaded'; 
+            projetoAdapter.setAll(state, action.payload);
+            console.log(state, action)
+        },
+        [fetchProjeto.rejected]: (state, action) => {
+            state.status = 'failed'; 
+            state.error = action.error.message
+        },
+        [updateProjetoServer.pending]: (state) => {
+            state.status = 'loading'
+        },
+        [updateProjetoServer.fulfilled]: (state, action) => {
+            state.status= 'saved'; 
+            projetoAdapter.upsertOne(state, action.payload);
+        },
+        [addProjetoServer.pending]: (state) => {
+            state.status = 'loading'
+        },
+        [addProjetoServer.fulfilled]: (state, action) => {
+            state.status = 'saved'; 
+            projetoAdapter.addOne(state, action.payload);
+        },
+        [deleteProjetoServer.pending]: (state) => {
+            state.status = 'loading'
+        },
+        [deleteProjetoServer.fulfilled]: (state, action) => {
+            state.status = 'deleted'; 
+            projetoAdapter.removeOne(state, action.payload);
+        }
 
     } 
 
