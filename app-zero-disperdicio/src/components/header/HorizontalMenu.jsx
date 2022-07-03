@@ -29,7 +29,7 @@ export default function HorizontalMenu(){
     
     return(
         <nav className="principal-menu">
-            <div class={open ? "icon-menu icon-menu-closed" : "icon-menu"} onClick={(e) => openMenu(e)}>
+            <div className={open ? "icon-menu icon-menu-closed" : "icon-menu"} onClick={(e) => openMenu(e)}>
                 <span></span>
                 <span></span>
                 <span></span>

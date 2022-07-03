@@ -1,0 +1,25 @@
+{
+  "projeto": [
+    {
+      "nome": "Coca-Cola",
+      "quantidade": "3",
+      "dataDeValidade": "2022-06-04",
+      "id": 1,
+      "comentario": "ratazana"
+    },
+    {
+      "nome": "soverte",
+      "quantidade": "19",
+      "dataValidade": "2022-06-04",
+      "id": 2,
+      "comentarios": "jnnuiiuiuhiu"
+    },
+    {
+      "category": "suplementos",
+      "nome": "Sabão em pó",
+      "quantidade": "55",
+      "dataDeValidade": "2022-07-09",
+      "id": 3
+    }
+  ]
+}

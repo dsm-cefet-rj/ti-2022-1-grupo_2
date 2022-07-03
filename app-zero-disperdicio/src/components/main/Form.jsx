@@ -1,76 +1,52 @@
 import React, { useState } from 'react';
 import './Form.css';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-//import { addProjeto, updateProjeto} from './ProjetoSlice';
-import { addProjetoServer, updateProjetoServer, selectedByIdProjeto} from './ProjetoSlice';
-import {projetoSchema} from './ProjetoSchema';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {useForm} from 'react-hook-form';
+import { addProjetoServer, updateProjetoServer, selectProjetoById } from './ProjetoSlice';
 
 export default function Form() {
-    //const projeto = useSelector(state => state.projeto);
-    //esse const projeto no novo arquivo sumirá
-
     const dispatch = useDispatch();
     let { id } = useParams();
     id = parseInt(id);
-     const projetoFound = useSelector(state => selectedByIdProjeto(state, id));
-     const {register, handleSubmit, errors}  = useForm({
-        resolver: yupResolver(projetoSchema)
-    }); 
+    let navigate = useNavigate();
 
-    /* const [product, setProduct] = useState(
-        id ? projeto.filter((p) => p.id === id)[0] ?? {} : {}); */
+    const projetoFound = useSelector(state => selectProjetoById(state, id));
 
-         const [productOnLoad] = useState(
-            id ? projetoFound ?? projetoSchema.cast({}): projetoSchema.cast({}));    
+    const [product, setProduct] = useState(
+        id ? projetoFound ?? {} : {}
+    );
 
-    /* const [actiontype,] = useState(
-        id ?
-            projeto.filter((p) => p.id === id)[0]
-                ? 'projeto/updateProjeto'
-                : 'projeto/addProjeto'
-                : 'projeto/addProjeto'
-    ); */
-
-     const [actiontype,] = useState(
+    const [actiontype] = useState(
         id ?
             projetoFound
                 ? 'projeto/updateProjeto'
                 : 'projeto/addProjeto'
                 : 'projeto/addProjeto'
-    ); 
+    );
 
-    /* function handleInputChange(e) {
+    function handleInputChange(e) {
         setProduct({ ...product, [e.target.name]: e.target.value });
-    } */
-    //essa funcao acima n será necessaria
-
-    /* function handleSubmit(e) {
-        e.preventDefault();
-        if (actiontype === 'projeto/addProjeto') {
-            dispatch(addProjeto(product));
-        } else {
-            dispatch(updateProjeto(product));
-         }
-    }*/
-
-     function onSubmit(productOnLoad) {
-        if (actiontype === 'projeto/addProjeto') {
-            dispatch(addProjetoServer(productOnLoad));
-        } else {
-            dispatch(updateProjetoServer(...productOnLoad, id, projetoFound.id));
-        }
     }
 
-    /* return (
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (actiontype === 'projeto/addProjeto') {
+            dispatch(addProjetoServer(product));
+        } else {
+            console.log(product)
+            dispatch(updateProjetoServer(product));
+
+        }
+        navigate('/success'/* , { replace: true } */);
+    }
+
+    return (
         <form action="#" id="register-product" onSubmit={handleSubmit} >
             <div id="category-container">
-                <label for="produtct-category">Categoria</label>
-                <select id="produtct-category" className="input" name="category">
-                    <option selected disabled>Selecione</option>
-                    <option value="geladeira">Geladeira</option>
+                <label htmlFor="product-category">Categoria</label>
+                <select id="product-category" className="input" name="category" value={product.category || ''} onChange={handleInputChange} required >
+                    <option value="disabled">Selecione</option>
+                    <option value="geladeira">Geladeira/Freezer</option>
                     <option value="armário">Armário</option>
                     <option value="suplementos">Suplementos</option>
                     <option value="remédios">Remédios</option>
@@ -78,68 +54,26 @@ export default function Form() {
             </div>
 
             <div id="name-container">
-                <label for="name-product">Nome do produto</label>
-                <input type="text" className="input" id="name-product" name="nome" value={product.nome} placeholder="Nome do produto" onChange={handleInputChange} />
+                <label htmlFor="name-product">Nome do produto</label>
+                <input type="text" className="input" id="name-product" name="nome" value={product.nome || ''} placeholder="Nome do produto" onChange={handleInputChange} required />
             </div>
 
             <div id="expiration-container">
-                <label for="expiration-date">Data de validade</label>
-                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade} onChange={handleInputChange} />
+                <label htmlFor="expiration-date">Data de validade</label>
+                <input type="date" className="input" id="expiration-date" name="dataDeValidade" value={product.dataDeValidade || ''} onChange={handleInputChange} required />
             </div>
 
             <div id="quantity-container">
-                <label for="quantity">Quantidade</label>
-                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade} onChange={handleInputChange} />
+                <label htmlFor="quantity">Quantidade</label>
+                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={product.quantidade || ''} onChange={handleInputChange} required />
             </div>
 
             <div id="comments-container">
-                <label for="comments">Comentários</label>
-                <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios} onChange={handleInputChange}></textarea>
+                <label htmlFor="comments">Comentários</label>
+                <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios || ''} onChange={handleInputChange}></textarea>
             </div>
 
-            <input id="botao-cadastrar" className="button" type="submit" value="salvar" />
+            <input id="botao-cadastrar" className="button" type="submit" value="Cadastrar" />
         </form>
     )
-}  */  
-
- return (
-    <form action="#" id="register-product" onSubmit={handleSubmit(onSubmit)} >
-        <div id="category-container">
-            <label for="produtct-category">Categoria</label>
-            <select id="produtct-category" className="input" name="category">
-                <option selected disabled>Selecione</option>
-                <option value="geladeira">Geladeira</option>
-                <option value="armário">Armário</option>
-                <option value="suplementos">Suplementos</option>
-                <option value="remédios">Remédios</option>
-            </select>
-        </div>
-
-        <div id="name-container">
-            <label for="name-product">Nome do produto</label>
-            <input type="text" className="input" id="name-product" name="nome" defaultvalue={productOnLoad.nome} ref={register} placeholder="Nome do produto" />
-            &nbsp:<span>{errors.nome?.message}</span>
-        </div>
-
-        <div id="expiration-container">
-            <label for="expiration-date">Data de validade</label>
-            <input type="date" className="input" id="expiration-date" name="dataDeValidade" defaultvalue={productOnLoad.dataDeValidade} ref={register}  />
-            &nbsp:<span>{errors.dataDeValidade?.message}</span>
-        </div>
-
-        <div id="quantity-container">
-            <label for="quantity">Quantidade</label>
-            <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" defaultvalue={productOnLoad.quantidade} ref={register} />
-            &nbsp:<span>{errors.quantidade?.message}</span>
-        </div>
-
-        <div id="comments-container">
-            <label for="comments">Comentários</label>
-            <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" dfaultvalue={productOnLoad.comentarios} ref={register}></textarea>
-            &nbsp:<span>{errors.comentarios?.message}</span>
-        </div>
-
-        <input id="botao-cadastrar" className="button" type="submit" value="salvar" />
-    </form>
-)
-}    
+}   

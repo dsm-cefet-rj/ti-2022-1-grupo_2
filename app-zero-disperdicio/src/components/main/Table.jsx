@@ -1,50 +1,54 @@
-import React , {useEffect}  from 'react';
+import React, {useState, useEffect } from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteProjetoServer , fetchProjeto, selectedAllProjeto} from './ProjetoSlice';
-//import { deleteProjeto} from './ProjetoSlice';
+import { deleteProjetoServer, fetchProjeto, selectAllProjeto } from './ProjetoSlice';
+import { Link, Route, Routes } from 'react-router-dom';
 
-
-
-export default function ListagemTabela(props) {
-
-    //const projeto = useSelector(state => state.projeto);
-
-    const projeto = useSelector(selectedAllProjeto);
+export default function ListagemTabela() {
+    const projeto = useSelector(selectAllProjeto);
     const status = useSelector(state => state.projeto.status);
     const error = useSelector(state => state.projeto.error);
 
+    /* const projetoState = useSelector(state => state.projeto);
+    const projeto = projetoState.projeto;
+    const status = projetoState.status;
+    const error = projetoState.error; */
+    //const projeto = useSelector(state => state.projeto.projeto);
     const dispatch = useDispatch();
 
-
-    /* function handleClickExcluirProjeto(id) {
-        dispatch(deleteProjeto(id));
-    } */
-    
-     function handleClickExcluirProjeto(id) {
+    function handleClickExcluirProjeto(id) {
         dispatch(deleteProjetoServer(id));
-    } 
+    }
 
-     useEffect(() => {
-        if(status === 'not_loaded'){
+    function Tabee() {
+        return (
+            <Routes>
+                <Route path='/success' element={<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />} />
+            </Routes>
+        );
+    }
+
+    useEffect(() => {
+        if (status === 'not_loaded') {
             dispatch(fetchProjeto());
         }
-    }, [status, dispatch]) 
+    }, [status, dispatch])
 
-     let Tabela = '';
-    if(status === 'loaded'|| status === 'saved' || status === 'deleted'){
-        Tabela = <Tabelalis projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />;
+    let tabela = '';
+    if (status === 'loaded' || status === 'saved' || status === 'deleted') {
+        tabela = (<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> || <Tabee />);
+
     }
-    else if(status === 'loading'){
-        Tabela = <div>Carregando os produtos...</div>;
+    else if (status === 'loading') {
+        tabela = <div>Carregando os produtos...</div>;
     }
-    else if(status === 'failed'){
-        Tabela = <div>Erro: {error}</div>;
-    } 
+    else if (status === 'failed') {
+        tabela = <div>Erro: {error}</div>;
+    }
 
     return (
         <>
-    {Tabela}   
+            {tabela}
             {/* <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */}
         </>
     );
@@ -52,31 +56,34 @@ export default function ListagemTabela(props) {
 }
 
 const LinhaTabela = (props) => {
+     /* const [open, setOpen] = useState(false)
+    function atualizarProduto(e) {
+        setOpen(!open)
+        console.log(open)
+    }  */
     return (
         <tr>
             <td data-label="nome">
-                <button>
-                <span>{props.projeto.nome}</span>
-                </button>
+                <button><Link to={`/forme/${props.projeto.id}`}><span>{props.projeto.nome/* nomeProduto */}</span></Link></button>
             </td>
             <td data-label="validade">
-                <span>{props.projeto.dataDeValidade}</span>
+                <span>{props.projeto.dataDeValidade/* dataValidade */}</span>
             </td>
             <td data-label="quantidade">
                 <span>{props.projeto.quantidade}</span>
             </td>
             <td data-label="comentários">
-                <span>{props.projeto.comentarios}</span>
+                <span>{props.projeto.comentarios/* comentario */}</span>
             </td>
-            <td class="btn-container">
-                <button id="update" className="button">Atualizar</button>
+            <td className="btn-container">
+                {/* <button id="update" className="button" onClick={(e) => atualizarProduto(e)}>Atualizar</button> */}
                 <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
             </td>
         </tr>
     );
 }
 
-function Tabelalis(props) {
+function Tabela(props) {
     return (
         <table>
             <thead>
@@ -94,51 +101,3 @@ function Tabelalis(props) {
         </table>
     );
 }
-
-// export default function Table() {
-//     return (
-//         <table>
-//             <thead>
-//                 <tr>
-//                     <th>Nome</th>
-//                     <th>Data de validade</th>
-//                     <th>Quantidade</th>
-//                     <th>Comentários</th>
-//                     <th></th>
-//                 </tr>
-//             </thead>
-//             <tbody>
-//                 <tr>
-//                     <td data-label="nome"><span>Queijo Minas</span></td>
-//                     <td data-label="validade"><span>20/06/2022</span></td>
-//                     <td data-label="quantidade"><span>1 u.n.</span></td>
-//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-//                     <td class="btn-container">
-//                         <button id="update" class="button">Atualizar</button>
-//                         <button id="delete" class="button">Apagar</button>
-//                     </td>
-//                 </tr>
-//                 <tr>
-//                     <td data-label="nome"><span>Queijo Minas</span></td>
-//                     <td data-label="validade"><span>20/06/2022</span></td>
-//                     <td data-label="quantidade"><span>1 u.n.</span></td>
-//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-//                     <td class="btn-container">
-//                         <button id="update" class="button">Atualizar</button>
-//                         <button id="delete" class="button">Apagar</button>
-//                     </td>
-//                 </tr>
-//                 <tr>
-//                     <td data-label="nome"><span>Queijo Minas</span></td>
-//                     <td data-label="validade"><span>20/06/2022</span></td>
-//                     <td data-label="quantidade"><span>1 u.n.</span></td>
-//                     <td data-label="comentários"><span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, nobis qui.</span></td>
-//                     <td class="btn-container">
-//                         <button id="update" class="button">Atualizar</button>
-//                         <button id="delete" class="button">Apagar</button>
-//                     </td>
-//                 </tr>
-//             </tbody>
-//         </table>
-//     )
-// }
