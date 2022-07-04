@@ -2,14 +2,14 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-//Autenticacao 2? OPCAO----------------
+//Autenticacao 2 e 3 OPCAO----------------
 var session = require('express-session'); // instale expression-session(npm install express-session session-file-store) são dois pacotes
 var FileStore = require('session-file-store')(session);
-//FIM-Autenticacao2----------------
+//FIM-Autenticacao2 e 3----------------
 
 //imports de libs para ultima autenticacao
-//var passport = require('express');
-//var authenticate = require('./authenticate');
+var passport = require('express');
+var authenticate = require('./authenticate');
 
 let bodyParser = require('body-parser')
 let mongoose = require('mongoose')
@@ -104,7 +104,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //AUTENTICACAO 3° OPCAO ---------------
 //caso for usar: vá ao gitgnore e coloque: sessions/
-app.use(session({
+/* app.use(session({
     name: 'session-id',
     secret: '12345-67890-73567-54321',
     saveUninitialized: false,
@@ -133,8 +133,37 @@ function auth(req, res, next) {
             return next(err);
         }
     }
-}    
+} */    
 //FIM---AUTENTICACAO3---------------
+
+//AUTENTICACAO 4° OPCAO ---------------
+app.use(session({
+    name: 'session-id',
+    secret: '12345-67890-73567-54321',
+    saveUninitialized: false,
+    resave: false,
+    store: new FileStore()
+
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+function auth(req, res, next) {
+    console.log(req.user);
+    
+    if(!req.user) {
+        var err = new Error('You are not authenticated!');
+        err.status = 403;
+        next(err);
+    } else {
+        next();
+    }
+}
+//FIM---AUTENTICACAO4---------------
 
 // app abaixo é usado para as autenticacoes
 app.use(auth);
