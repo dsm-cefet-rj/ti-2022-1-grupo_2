@@ -1,15 +1,48 @@
 import './NotificationsBell.css'
 import DropdownMenu from './DropdownMenu'
 import { useState, useEffect } from 'react'
+import { io } from "socket.io-client";
 
-export default function NotificationsBell() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const socket = io('http://localhost:3004');
+
+socket.on('connect', () => console.log('[IO] Connect => New Connection'))
+
+
+export default function NotificationsBell() {   
     const [count, setCount] = useState(0)
     const [open, setOpen] = useState(false)
+    const [notifications, setNotifications] = useState([])
 
+    
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCount(count + 1)
-        }, 10000);
+        fetch('http://localhost:3004/notificacao')
+            .then(data => data.json())
+            .then(notification => {
+                setNotifications(notification)
+            })
+        
+        socket.on('server:notificacao', () => {
+            fetch('http://localhost:3004/notificacao')
+            .then(data => data.json())
+            .then(notification => {
+                setNotifications(notification)
+                toast.warn(`Faltam 7 dias para a validade da(o) ${notification[0].nomeProduto} expirar.`, {
+                    theme: 'colored',
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                toast.clearWaitingQueue()
+                setCount(count + 1)
+            })
+        })
 
         function closedMenu(e){ 
             const bell = document.querySelector("#bell")
@@ -26,12 +59,12 @@ export default function NotificationsBell() {
         document.addEventListener('click', closedMenu)
 
         return () => {
-            clearInterval(interval)
             document.removeEventListener('click', closedMenu)
         }
-    })
+    }, [count])
 
     function openMenuNotications(e) {
+        setCount(0)
         setOpen(!open)
     }
 
@@ -41,7 +74,20 @@ export default function NotificationsBell() {
                 <i id="bell"></i>
                 <span id="notifications-count">{count}</span>
             </div>
-            <DropdownMenu open={open}/>
+            <DropdownMenu open={open} notifications={notifications}/>
+            <ToastContainer
+            theme='colered'
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            limit={1}
+            />
         </div>
     )
 }

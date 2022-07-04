@@ -22,7 +22,7 @@ export default function Main(props){
                 <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
                 <Routeamento />
                 <Accordion/>
-                <Alert/>
+                {/* <Alert/> */}
                 {/* <ModalAtualizar/> */}
             </main>
         
