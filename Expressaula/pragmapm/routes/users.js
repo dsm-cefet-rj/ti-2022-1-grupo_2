@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
+var mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 require('../models/users.js')
-const Produto = mongoose.model('users')
+const User = mongoose.model('User')
 
 router.post('/signup', (req, res, next) => {
     User.findOne({username: req.body.username})
@@ -28,9 +28,9 @@ router.post('/signup', (req, res, next) => {
     }, (err) => next(err));
 });
 
-router.post('/login', (req, res, next) => {
+router.get('/login', (req, res, next) => {
     if(!req.session.user) {
-        var authHeader = re.headers.authorization;
+        var authHeader = req.headers.authorization;
 
         if(!authHeader) {
             var err = new Error('You are not authenticated!');
@@ -39,7 +39,7 @@ router.post('/login', (req, res, next) => {
             return next(err);
         }
 
-        var auth = new Buffer.from(authHeader.splite(' ')[1], 'base64').toString().splite(':');
+        var auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
         var username= auth[0];
         var password = auth[1];
 

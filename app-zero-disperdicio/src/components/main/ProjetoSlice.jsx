@@ -1,6 +1,6 @@
 import { createSlice , createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import {httpDelete, httpPut, httpGet, httpPost} from './Utils';
-import {baseUrl} from './baseURL';
+import {baseURL} from './baseURL';
 
 const projetoAdapter = createEntityAdapter();
 const initialState = projetoAdapter.getInitialState({
@@ -57,24 +57,24 @@ const initialState = projetoAdapter.getInitialState({
 }) */ 
 
 export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async() => {
-     return await httpGet(`${baseUrl}/projeto`);
-    //return await httpGet('http://localhost:3004/produtos');
+     //return await httpGet(`${baseUrl}/projeto`);
+    return await httpGet('http://localhost:3004/produtos');
 })
 
 export const deleteProjetoServer = createAsyncThunk('projeto/deleteProjetoServer', async(idProduct) => {
-     await httpDelete(`${baseUrl}/projeto/${idProduct}`);
-    //await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`);
+    // await httpDelete(`${baseUrl}/projeto/${idProduct}`);
+    await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`);
     return idProduct;
 })
 
 export const addProjetoServer = createAsyncThunk('projeto/addProjetoServer', async(product) => {
-    return await httpPost(`${baseUrl}/projeto`, product);
-   //return await httpPost('http://localhost:3004/produtos/salvar', product);
+   // return await httpPost(`${baseUrl}/projeto`, product);
+   return await httpPost('http://localhost:3004/produtos/salvar', product);
 })
 
 export const updateProjetoServer = createAsyncThunk('projeto/updateProjetoServer', async(product) => {
-     return await httpPut(`${baseUrl}/projeto/${product.id}`, product);
-    //return await httpPut(`http://localhost:3004/produtos/atualizar/${product.id}`, product);
+    // return await httpPut(`${baseUrl}/projeto/${product.id}`, product);
+    return await httpPut(`http://localhost:3004/produtos/atualizar/${product.id}`, product);
 })
 
 export const projetoSlice = createSlice({

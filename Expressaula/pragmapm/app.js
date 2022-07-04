@@ -6,6 +6,11 @@ let logger = require('morgan');
 var session = require('express-session'); // instale expression-session(npm install express-session session-file-store) são dois pacotes
 var FileStore = require('session-file-store')(session);
 //FIM-Autenticacao2----------------
+
+//imports de libs para ultima autenticacao
+//var passport = require('express');
+//var authenticate = require('./authenticate');
+
 let bodyParser = require('body-parser')
 let mongoose = require('mongoose')
 let cors = require('cors')
@@ -142,7 +147,9 @@ app.use('/forme', formeRouter);
 
 // Mongoose
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/appZero')
+/* mongoose.connect('mongodb://localhost:27017/appZero') */
+mongoose.connect('mongodb+srv://md2alfa:gab9400G@psw-gab.fpeni5q.mongodb.net/test')
+
     .then(() => {
         console.log('Conectado ao mongodb')
     })
