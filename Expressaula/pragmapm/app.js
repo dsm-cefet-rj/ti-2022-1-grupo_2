@@ -19,6 +19,8 @@ let indexRouter = require('./routes/index');
 let formeRouter = require('./routes/forme');
 let usersRouter = require('./routes/users');
 
+var config = require('./config');
+
 let app = express();
 
 app.use(bodyParser.json())
@@ -137,7 +139,7 @@ function auth(req, res, next) {
 //FIM---AUTENTICACAO3---------------
 
 //AUTENTICACAO 4° OPCAO ---------------
-app.use(session({
+/* app.use(session({
     name: 'session-id',
     secret: '12345-67890-73567-54321',
     saveUninitialized: false,
@@ -162,11 +164,20 @@ function auth(req, res, next) {
     } else {
         next();
     }
-}
+} */
 //FIM---AUTENTICACAO4---------------
 
-// app abaixo é usado para as autenticacoes
-app.use(auth);
+//AUTENTICACAO 5° OPCAO ---------------
+app.use(passport.initialize());
+
+//app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+
+//FIM---AUTENTICACAO5---------------
+
+// app abaixo é usado para as autenticacoes menos na 5°
+//app.use(auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -177,7 +188,8 @@ app.use('/forme', formeRouter);
 // Mongoose
 mongoose.Promise = global.Promise
 /* mongoose.connect('mongodb://localhost:27017/appZero') */
-mongoose.connect('mongodb+srv://md2alfa:gab9400G@psw-gab.fpeni5q.mongodb.net/test')
+/* mongoose.connect('mongodb+srv://md2alfa:gab9400G@psw-gab.fpeni5q.mongodb.net/test') */
+mongoose.connect(config.mongoUrl)
 
     .then(() => {
         console.log('Conectado ao mongodb')

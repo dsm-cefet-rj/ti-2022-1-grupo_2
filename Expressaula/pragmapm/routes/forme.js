@@ -4,11 +4,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 require('../models/Produto.js')
 const Produto = mongoose.model('produtos')
+var authenticate = require('../authenticate');
+
 
 router.use(bodyParser.json());
 
 // Listar Produto(s)
-router.get('/produtos', (req, res) => {
+router.get('/produtos', authenticate.verifyUser, (req, res) => {
+    console.log(req.user);
     Produto.find()
         .then(produtos => {
             res.json(produtos)
@@ -19,7 +22,7 @@ router.get('/produtos', (req, res) => {
 })
 
 // Cadastrar Produto
-router.post('/produtos/salvar', (req, res) => {
+router.post('/produtos/salvar', authenticate.verifyUser, (req, res) => {
     const novoProduto = {
         categoria: req.body.category,
         nomeProduto: req.body.nome,
@@ -40,7 +43,7 @@ router.post('/produtos/salvar', (req, res) => {
 })
 
 // Buscar produto pelo ID
-router.get('/produtos/:id', (req, res) => {
+router.get('/produtos/:id', authenticate.verifyUser, (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
             console.log('Buscando produto pelo ID com sucesso!')
@@ -52,7 +55,7 @@ router.get('/produtos/:id', (req, res) => {
 })
 
 // Atualizar Produto 
-router.put('/produtos/atualizar/:id', (req, res) => {
+router.put('/produtos/atualizar/:id', authenticate.verifyUser, (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
             produto.categoria = req.body.category,
@@ -76,7 +79,7 @@ router.put('/produtos/atualizar/:id', (req, res) => {
 })
 
 // Deletar produto pelo ID
-router.delete('/produtos/deletar/:id', (req, res) => {
+router.delete('/produtos/deletar/:id', authenticate.verifyUser, (req, res) => {
     Produto.deleteOne({_id: req.params.id})
         .then(produto => {
             console.log('Produto deletado com sucesso!')
