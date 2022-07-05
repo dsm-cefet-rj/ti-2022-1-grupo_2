@@ -33,3 +33,4 @@ Produto.set('toJSON', {
 });
 
 mongoose.model('produtos', Produto)
+module.exports = Produto;

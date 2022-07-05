@@ -11,7 +11,7 @@ var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 
-router.post('/signup', (req, res, next) => {
+router.post('/singup', (req, res, next) => {
     User.register(new User({username: req.body.username}),
     req.body.password, (err, user) => {
         if(err) {

@@ -8,7 +8,7 @@ var FileStore = require('session-file-store')(session);
 //FIM-Autenticacao2 e 3----------------
 
 //imports de libs para ultima autenticacao
-var passport = require('express');
+var passport = require('passport');
 var authenticate = require('./authenticate');
 
 let bodyParser = require('body-parser')
@@ -188,8 +188,8 @@ app.use('/forme', formeRouter);
 // Mongoose
 mongoose.Promise = global.Promise
 /* mongoose.connect('mongodb://localhost:27017/appZero') */
-/* mongoose.connect('mongodb+srv://md2alfa:gab9400G@psw-gab.fpeni5q.mongodb.net/test') */
-mongoose.connect(config.mongoUrl)
+ //mongoose.connect('mongodb://md2alfa:gab9400GABPSW@psw-gab.fpeni5q.mongodb.net/test') 
+mongoose.connect(config.mongoURI)
 
     .then(() => {
         console.log('Conectado ao mongodb')

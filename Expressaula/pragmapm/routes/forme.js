@@ -10,7 +10,7 @@ var authenticate = require('../authenticate');
 router.use(bodyParser.json());
 
 // Listar Produto(s)
-router.get('/produtos', authenticate.verifyUser, (req, res) => {
+router.get('/produtos', /* authenticate.verifyUser, */ (req, res) => {
     console.log(req.user);
     Produto.find()
         .then(produtos => {
@@ -22,7 +22,7 @@ router.get('/produtos', authenticate.verifyUser, (req, res) => {
 })
 
 // Cadastrar Produto
-router.post('/produtos/salvar', authenticate.verifyUser, (req, res) => {
+router.post('/produtos/salvar', /* authenticate.verifyUser, */ (req, res) => {
     const novoProduto = {
         categoria: req.body.category,
         nomeProduto: req.body.nome,
@@ -43,7 +43,7 @@ router.post('/produtos/salvar', authenticate.verifyUser, (req, res) => {
 })
 
 // Buscar produto pelo ID
-router.get('/produtos/:id', authenticate.verifyUser, (req, res) => {
+router.get('/produtos/:id', /* authenticate.verifyUser, */ (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
             console.log('Buscando produto pelo ID com sucesso!')
@@ -55,7 +55,7 @@ router.get('/produtos/:id', authenticate.verifyUser, (req, res) => {
 })
 
 // Atualizar Produto 
-router.put('/produtos/atualizar/:id', authenticate.verifyUser, (req, res) => {
+router.put('/produtos/atualizar/:id', /* authenticate.verifyUser, */ (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
             produto.categoria = req.body.category,
@@ -79,7 +79,7 @@ router.put('/produtos/atualizar/:id', authenticate.verifyUser, (req, res) => {
 })
 
 // Deletar produto pelo ID
-router.delete('/produtos/deletar/:id', authenticate.verifyUser, (req, res) => {
+router.delete('/produtos/deletar/:id', /* authenticate.verifyUser, */ (req, res) => {
     Produto.deleteOne({_id: req.params.id})
         .then(produto => {
             console.log('Produto deletado com sucesso!')

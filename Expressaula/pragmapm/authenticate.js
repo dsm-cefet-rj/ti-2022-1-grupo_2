@@ -8,9 +8,9 @@ var jwt = require('jsonwebtoken').Strategy;
 var config = require('./config.js');
 
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+//passport.use(new LocalStrategy(User.authenticate()));
+//passport.serializeUser(User.serializeUser());
+//passport.deserializeUser(User.deserializeUser());
 
 exports.getToken = function(user) {
     return jwt.sign(user, config.secretKey,
@@ -18,8 +18,8 @@ exports.getToken = function(user) {
 };
 
 var opts = {};
-opts.jstFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretKey = config.secretKey;
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = config.secretKey;
 
 exports.jwtPassport = passport.use(new JwtStrategy(opts,
     (jwt_payload, done) => {
