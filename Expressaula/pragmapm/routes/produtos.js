@@ -40,14 +40,26 @@ router.post('/produtos/salvar', (req, res) => {
 })
 
 // Buscar produto pelo ID
-router.get('/produtos/:id', (req, res) => {
+router.get('/produtos/buscar/:id', (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
             console.log('Buscando produto pelo ID com sucesso!')
-            res.send(produto)
+            res.json(produto)
         })
         .catch(err => {
             console.log('Erro ao busca produto pelo ID: ' + err)
+        })
+})
+
+// Buscar produto por Categoria
+router.get('/produtos/:id', (req, res) => {
+    Produto.find({categoria: req.params.id})
+        .then(prodsGeladeira => {
+            res.json(prodsGeladeira)
+        })
+        .catch(err => {
+            res.send('Erro')
+            console.log('Não foi possível achar o produto: ' + err)
         })
 })
 
