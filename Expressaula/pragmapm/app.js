@@ -8,6 +8,9 @@ const cors = require('cors')
 const { v1: uuidv1 } = require('uuid');
 const cron = require('node-cron')
 
+const passport = require('passport');
+const authenticate = require('./authenticate');
+
 require('./models/Notificacao')
 require('./models/Produto')
 
@@ -17,6 +20,9 @@ const Notificacao = mongoose.model('notificacoes')
 const indexRouter = require('./routes/index');
 const produtosRouter = require('./routes/produtos');
 const notificacaoRouter = require('./routes/notificacao');
+const usersRouter = require('./routes/users');
+
+const config = require('./config');
 
 const app = express();
 
@@ -30,10 +36,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(produtosRouter)
 app.use(notificacaoRouter)
+app.use(usersRouter)
 app.use('/', indexRouter);
 app.use('/produtos', produtosRouter);
 app.use('/notificacao', notificacaoRouter);
-
+app.use('/users', usersRouter)
 
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -53,7 +60,8 @@ httpServer.listen(3004)
 
 // Mongoose
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/appZero')
+// mongoose.connect('mongodb://localhost:27017/appZero')
+mongoose.connect(config.mongoURI)
     .then(() => {
         console.log('Conectado ao mongodb')
     })
