@@ -15,17 +15,19 @@ function Routeamento(props){
 
 export default function Main(props){
     return(
-        <BrowserRouter>
+        // <BrowserRouter>
    
             <main className="container">
-            
+                <br></br>
+                <br></br>
+                <h1>Cadastre seus produtos!</h1>
                 <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
-                <Routeamento />
+                <Routeamento /> 
                 <Accordion/>
-                {/* <Alert/> */}
+                <Alert/>
                 {/* <ModalAtualizar/> */}
             </main>
         
-        </BrowserRouter>
+        /*  </BrowserRouter>  */
     )
 }

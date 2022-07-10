@@ -90,6 +90,8 @@ cron.schedule('*/30 * * * * *', () => {
                             dataValidade: produto.dataValidade
                         }
 
+                        console.log(novaNotificacao)
+
                         // new Notificacao(novaNotificacao).save()
                         //     .then(notificacao => {
                         //         console.log('Notificação criada no BD')
