@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginServer, selectLoginById} from './LoginSlice';
 
 export default function LoginForm() {
     //const login = useSelector(state => selectLoginById(state, id));
-    const [login, loginState] = useState();
+    //const [login, loginState] = useState();
     const dispatch = useDispatch();
+    let naviga = useNavigate();
     let { id } = useParams();
     id = parseInt(id);
+    const status = useSelector(state => state.login.status);
 
 
-    function handleSubmit(e) {
+    function handleSubmit(login) {
         dispatch(loginServer(login));
     }
+    
+    useEffect(() => {
+        if (status === 'logged_in') {
+            naviga('/success'/* , { replace: true } */);
+        }
+    }, [status])
 
     return (
         <form action="#" id="login-product" onSubmit={handleSubmit} >

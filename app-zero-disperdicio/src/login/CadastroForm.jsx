@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { cadastrarServer, selectCadastrarById} from './CadastrarSlice';
 
 export default function CadastroForm() {
-    //const cadastrar = useSelector(state => selectCadastrarById(state, id));
-    const [cadastrar, cadastrarState] = useState();
+    //const [cadastrar, cadastrarState] = useState();
     const dispatch = useDispatch();
     let { id } = useParams();
-    //id = parseInt(id);
+    id = parseInt(id);
+    const status = useSelector(state => state.cadastrar.status);
 
 
-    function handleSubmit(e) {
+    function handleSubmit(cadastrar) {
             dispatch(cadastrarServer(cadastrar));
     }
+
+    useEffect(() => {
+        if (status === 'cadastrado') {
+            naviga('/logar'/* , { replace: true } */);
+        }
+    }, [status])
 
     return (
         <form action="#" id="cadastrar-product" onSubmit={handleSubmit} >

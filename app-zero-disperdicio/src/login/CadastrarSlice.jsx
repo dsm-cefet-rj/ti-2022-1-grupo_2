@@ -9,7 +9,7 @@ const initialState = cadastrarAdapter.getInitialState({
 
 export const cadastrarServer = createAsyncThunk('cadastrar/cadastrarServer', async(cadastrar) => {
   // return await httpPost(`${baseUrl}/projeto`, product);
-  return await httpPost('http://localhost:3004/signup', cadastrar);
+  return await httpPost('http://localhost:3004/cadastrar', cadastrar);
 })
 
 export const cadastrarSlice = createSlice({
@@ -22,10 +22,10 @@ export const cadastrarSlice = createSlice({
    } , */
    extraReducers:{
        [cadastrarServer.pending]: (state) => {
-           state.status = 'loading'
+           state.status = 'trying_cadastrar'
        },
        [cadastrarServer.fulfilled]: (state, action) => {
-           state.status = 'saved'; 
+           state.status = 'cadastrado'; 
            cadastrarAdapter.addOne(state, action.payload);
        }
    }   

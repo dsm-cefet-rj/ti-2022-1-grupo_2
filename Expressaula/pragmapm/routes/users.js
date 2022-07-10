@@ -1,53 +1,81 @@
-var express = require('express');
+const express = require('express');
+//const app = express();
 var router = express.Router();
-var mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-
+const mongoose = require('mongoose')
 require('../models/users.js')
 const User = mongoose.model('User')
 
-var authenticate = require('../authenticate');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
+const { eAdmin } = require('../authenticate');
+
+//app.use(express.json());
 router.use(bodyParser.json());
 
-router.post('/singup', (req, res, next) => {
-    User.register(new User({username: req.body.username}),
-    req.body.password, (err, user) => {
-        if(err) {
-            res.statusCode = 500;
-            res.setHeader('Content-Type', 'application/json');
-            res.json({err: err});
+router.get('/', eAdmin, async (req, res) => {
+    return res.json({
+        erro: false,
+        mensagem: "Listar usuários",
+        id_usuario_logado: req.userId
+    });
+});
+
+router.post('/cadastrar', async (req, res) => {
+    var dados = req.body;
+    dados.password = await bcrypt.hash(dados.password, 8);
+
+    await User.create(dados)
+    .then(() => {
+        return res.json({
+            erro: false,
+            mensagem: "Usuário cadastrado!"
+        });
+    }).catch(() => {
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: usuário não cadastrado com sucesso!"
+        });
+    })
+});
+
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({
+        attributes: ['id', 'name', 'email', 'password'],
+        where: {
+            email: req.body.email
         }
-        else {
-            passport.authenticate('jwt')(req, res, () => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json({sucess: true, status: 'Registration Succesful!'}); 
-            });
-        }
-    });    
-});
+    });
 
-router.post('/login', passport.authenticate('jwt'),  (req, res) => {
-    var token = authenticate.getToken({_id: req.user._id});
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({id: req.user._id, token: token});
-});
-    
-
-router.get('/logout', (req, res) => {
-    if (req.session) {
-        res.session.destroy();
-        res.clearCookie('session-id');
-        res.redirect('/');
+    if(user === null){
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: Usuário ou a senha incorreta! E-mail incorreto!"
+        });
     }
-    else {
-        var err = new Error('You are not logged in!');
-        err.status = 403;
-        next(err);
+
+    if(!(await bcrypt.compare(req.body.password, user.password))){
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: Usuário ou a senha incorreta! Senha incorreta!"
+        });
     }
+
+    var token = jwt.sign({id: user.id}, "ABC123DEF456GHI789", {
+        //expiresIn: 600 //10 min
+        //expiresIn: 60 //1 min
+        expiresIn: '7d' // 7 dia
+    });
+
+    return res.json({
+        erro: false,
+        mensagem: "Login realizado com sucesso!",
+        token
+    });
 });
 
+/* app.listen(3004, () => {
+    console.log("Servidor iniciado na porta 3004: http://localhost:3004");
+}); */
 module.exports = router;

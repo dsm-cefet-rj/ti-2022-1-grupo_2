@@ -1,9 +1,17 @@
 import './App.css'; 
 import Header from './header/Header';
 import Main from './main/Main'
-import { BrowserRouter } from "react-router-dom";
 import CadastroForm from '../login/CadastroForm';
 import LoginForm from '../login/LoginForm';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+function Routear(props){
+  return( 
+      <Routes>
+          <Route path='logar' element = {<LoginForm />}/>
+      </Routes>
+  )
+}
 
 function App() {
   return (
@@ -21,6 +29,7 @@ function App() {
       <h1>Login!</h1>
       <LoginForm/>
       <Main/>
+      <Routear />
     </div>
     </BrowserRouter>
   );

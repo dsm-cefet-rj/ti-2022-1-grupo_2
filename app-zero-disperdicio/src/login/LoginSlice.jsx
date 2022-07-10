@@ -22,10 +22,10 @@ export const loginSlice = createSlice({
    } , */
    extraReducers:{
        [loginServer.pending]: (state) => {
-           state.status = 'loading'
+           state.status = 'trying_login'
        },
        [loginServer.fulfilled]: (state, action) => {
-           state.status = 'saved'; 
+           state.status = 'logged_in'; 
            loginAdapter.addOne(state, action.payload);
        }
    }   
