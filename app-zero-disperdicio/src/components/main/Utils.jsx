@@ -6,7 +6,7 @@ async function client(endpoint, { body, ...customConfig } = {}) {
         ...customConfig,
         headers: {
             ...headers,
-            ...customConfig.headers,
+            ...customConfig.headers
         },
     }
 

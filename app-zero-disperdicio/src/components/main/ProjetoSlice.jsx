@@ -56,25 +56,26 @@ const initialState = projetoAdapter.getInitialState({
     return await fetch(await fetch('http://localhost:3004/projeto')).json();
 }) */ 
 
-export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async() => {
+export const fetchProjeto = createAsyncThunk('projeto/fetchProjeto', async({getState}) => {
     // return await httpGet(`${baseUrl}/projeto`);
-    return await httpGet('http://localhost:3004/produtos');
+    return await httpGet('http://localhost:3004/produtos', {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 })
 
-export const deleteProjetoServer = createAsyncThunk('projeto/deleteProjetoServer', async(idProduct) => {
+export const deleteProjetoServer = createAsyncThunk('projeto/deleteProjetoServer', async(idProduct, {getState}) => {
     // await httpDelete(`${baseUrl}/projeto/${idProduct}`);
-    await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`);
+    await httpDelete(`http://localhost:3004/produtos/deletar/${idProduct}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idProduct;
 })
 
-export const addProjetoServer = createAsyncThunk('projeto/addProjetoServer', async(product) => {
+export const addProjetoServer = createAsyncThunk('projeto/addProjetoServer', async(product, {getState}) => {
 //    return await httpPost(`${baseUrl}/projeto`, product);
-   return await httpPost('http://localhost:3004/produtos/salvar', product);
+    console.log(getState().logins.entities.undefined)
+   return await httpPost('http://localhost:3004/produtos/salvar', product, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 })
 
-export const updateProjetoServer = createAsyncThunk('projeto/updateProjetoServer', async(product) => {
+export const updateProjetoServer = createAsyncThunk('projeto/updateProjetoServer', async(product, {getState}) => {
     // return await httpPut(`${baseUrl}/projeto/${product.id}`, product);
-    return await httpPut(`http://localhost:3004/produtos/atualizar/${product.id}`, product);
+    return await httpPut(`http://localhost:3004/produtos/atualizar/${product.id}`, product, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 })
 
 export const projetoSlice = createSlice({
