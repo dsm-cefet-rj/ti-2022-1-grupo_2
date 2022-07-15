@@ -41,7 +41,7 @@ function TabelaGeladeira(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.category} projeto={projeto} />)}
+                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.id} projeto={projeto} />)}
             </tbody>
         </table>
     );

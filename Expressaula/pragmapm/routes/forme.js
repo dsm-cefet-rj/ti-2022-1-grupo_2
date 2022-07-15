@@ -9,6 +9,57 @@ const { eAdmin } = require('../authenticate');
 
 router.use(bodyParser.json());
 
+//TIPOS DE PRODUTO ---------------------------------
+
+// Buscar produto por Categoria
+router.get('/produtos/geladeira/:id', eAdmin, (req, res) => {
+    Produto.find({categoria: req.params.id})
+        .then(prodsGeladeira => {
+            res.json(prodsGeladeira)
+        })
+        .catch(err => {
+            res.send('Erro')
+            console.log('Não foi possível achar o produto: ' + err)
+        })
+})
+// Buscar produto por Categoria
+router.get('/produtos/armario/:id', eAdmin, (req, res) => {
+    Produto.find({categoria: req.params.id})
+        .then(prodsArmario => {
+            res.json(prodsArmario)
+        })
+        .catch(err => {
+            res.send('Erro')
+            console.log('Não foi possível achar o produto: ' + err)
+        })
+})
+// Buscar produto por Categoria
+router.get('/produtos/remedio/:id', eAdmin, (req, res) => {
+    Produto.find({categoria: req.params.id})
+        .then(prodsRemedio => {
+            res.json(prodsRemedio)
+        })
+        .catch(err => {
+            res.send('Erro')
+            console.log('Não foi possível achar o produto: ' + err)
+        })
+})
+// Buscar produto por Categoria
+router.get('/produtos/suplemento/:id', eAdmin, (req, res) => {
+    Produto.find({categoria: req.params.id})
+        .then(prodsSuplemento => {
+            res.json(prodsSuplemento)
+        })
+        .catch(err => {
+            res.send('Erro')
+            console.log('Não foi possível achar o produto: ' + err)
+        })
+})
+
+// FIM TIPOS DE PRODUTO -----------------------------------------
+
+
+
 // Listar Produto(s)
 router.get('/produtos', eAdmin, (req, res) => {
     console.log(req.user);

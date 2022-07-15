@@ -21,9 +21,6 @@ const LinhaGeladeira = (props) => {
             <td data-label="comentários">
                 <span>{props.projeto.comentarios/* comentario */}</span>
             </td>
-            <td className="check-container">
-            <input type="checkbox" id="check" value="check" />
-            </td>
         </tr>
     );
 }
@@ -41,7 +38,7 @@ function TabelaGeladeira(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.category} projeto={projeto} />)}
+                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.id} projeto={projeto} />)}
             </tbody>
         </table>
     );
