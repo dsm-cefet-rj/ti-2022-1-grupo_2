@@ -142,13 +142,26 @@ router.delete('/produtos/deletar/:id', eAdmin, (req, res) => {
 })
 
 
-//     .put((req, res, next) => {
+//     router.put('/produtos/atualizar/:id', eAdmin, (req, res, next) => {
 
-//         let index = projeto.map(p => p.id).indexOf(req.params.id);
-//         projeto.splice(index, 1, req.body);
+//         let index = produto.map(p => p.id).indexOf(req.params.id);
+//         produto.splice(index, 1, req.body);
 
 //         res.statusCode = 200;
 //         res.setHeader('Content-Type', 'application/json');
 //         res.json(req.body);
+//     })
+
+/* router.put('/produtos/atualizar/:id', eAdmin, (req, res, next) => {
+Produto.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  .then((produto) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(produto);
+  }, (err) => next(err))
+  .catch((err) => next(err));
+}) */
 
 module.exports = router;
