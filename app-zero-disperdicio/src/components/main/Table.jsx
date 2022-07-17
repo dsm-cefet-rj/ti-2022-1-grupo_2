@@ -1,8 +1,9 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import './Table.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteProjetoServer, fetchProjeto, selectAllProjeto } from './ProjetoSlice';
 import { Link, Route, Routes } from 'react-router-dom';
+import { Context } from './Context';
 
 export default function ListagemTabela() {
     const projeto = useSelector(selectAllProjeto);
@@ -56,10 +57,12 @@ export default function ListagemTabela() {
 }
 
 const LinhaTabela = (props) => {
-    const [open, setOpen] = useState(false)
+    const {open, setOpen, projeto, setProjeto, target, setTarget} = useContext(Context)
     function atualizarProduto(e) {
         setOpen(!open)
-        console.log(open)
+        setProjeto(props.projeto)
+        console.log(props.projeto)
+        setTarget(e.target)
     }
     return (
         <tr>
@@ -76,7 +79,7 @@ const LinhaTabela = (props) => {
                 <span>{props.projeto.comentario}</span>
             </td>
             <td className="btn-container">
-                {/* <button id="update" className="button" onClick={(e) => atualizarProduto(e)}>Atualizar</button> */}
+                <button id="update" className="button" onClick={(e) => atualizarProduto(e)}>Atualizar</button>
                 <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
             </td>
         </tr>

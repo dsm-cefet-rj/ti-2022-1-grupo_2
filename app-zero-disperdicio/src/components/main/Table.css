@@ -29,6 +29,10 @@ tbody > tr {
     background-color: #E21B1B;
 }
 
+#update, #delete {
+    display: block;
+}
+
 @media(max-width: 399px) {
     table {
         width: 280px;

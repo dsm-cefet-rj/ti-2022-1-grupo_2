@@ -75,6 +75,7 @@ export const addProjetoServer = createAsyncThunk('projeto/addProjetoServer', asy
 
 export const updateProjetoServer = createAsyncThunk('projeto/updateProjetoServer', async(product, {getState}) => {
     // return await httpPut(`${baseUrl}/projeto/${product.id}`, product);
+    console.log(product)
     return await httpPut(`http://localhost:3004/produtos/atualizar/${product.id}`, product, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 })
 

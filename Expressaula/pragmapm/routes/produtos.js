@@ -68,11 +68,11 @@ router.get('/produtos/:id', eAdmin, (req, res) => {
 router.put('/produtos/atualizar/:id', eAdmin, (req, res) => {
     Produto.findById({_id: req.params.id})
         .then(produto => {
-            produto.categoria = req.body.category,
-            produto.nomeProduto = req.body.nome,
-            produto.dataValidade = req.body.dataDeValidade,
+            produto.categoria = req.body.categoria,
+            produto.nomeProduto = req.body.nomeProduto,
+            produto.dataValidade = req.body.dataValidade,
             produto.quantidade = req.body.quantidade,
-            produto.comentario = req.body.comentarios
+            produto.comentario = req.body.comentario
 
             produto.save()
                 .then(produto => {

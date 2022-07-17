@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Accordion from './Accordion'
 import './Main.css'
 import ModalAtualizar from './ModalAtualizar';
+import {Storage} from './Context'
 
 function Routeamento(props){
     return( 
@@ -16,7 +17,7 @@ function Routeamento(props){
 export default function Main(props){
     return(
         // <BrowserRouter>
-   
+        <Storage>
             <main className="container">
                 <br></br>
                 <br></br>
@@ -24,10 +25,10 @@ export default function Main(props){
                 <Form projeto={props.projeto} setProjeto={props.setProjeto} /> 
                 <Routeamento /> 
                 <Accordion/>
-                <Alert/>
-                {/* <ModalAtualizar/> */}
+                {/* <Alert/> */}
+                <ModalAtualizar/>
             </main>
-        
+        </Storage>
         /*  </BrowserRouter>  */
     )
 }
