@@ -30,7 +30,7 @@ export default function ListagemSuplementos() {
 
     
     return (
-        {tabelag}
+        {tabelas}
     )
 } 
 

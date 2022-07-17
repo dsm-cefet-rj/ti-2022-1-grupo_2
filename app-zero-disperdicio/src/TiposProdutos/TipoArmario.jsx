@@ -18,7 +18,7 @@ export default function ListagemArmario() {
 
     let tabelaa = '';
     if (status === 'loaded' || status === 'saved' || status === 'deleted') {
-        tabelaga= (<TabelaArmario projeto={projeto}  /> || <Tabee />);
+        tabelaa= (<TabelaArmario projeto={projeto}  /> || <Tabee />);
 
     }
     else if (status === 'loading') {
@@ -30,7 +30,7 @@ export default function ListagemArmario() {
 
     
     return (
-        {tabelag}
+        {tabelaa}
     )
 } 
 
