@@ -1,12 +1,40 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Tabee } from '../components/main/Table';
+import { fetchProjeto, selectAllProjeto } from '../comoponents/main/ProjetoSlice';
 
-export default function ListagemGeladeira() {
+export default function ListagemSuplementos() {
+    const projeto = useSelector(selectAllProjeto);
+    const status = useSelector(state => state.projeto.status);
+    const error = useSelector(state => state.projeto.error);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (status === 'not_loaded') {
+            dispatch(fetchProjeto());
+        }
+    }, [status, dispatch])
+
+    let tabelas = '';
+    if (status === 'loaded' || status === 'saved' || status === 'deleted') {
+        tabelas = (<TabelaSuplementos projeto={projeto}  /> || <Tabee />);
+
+    }
+    else if (status === 'loading') {
+        tabelas = <div>Carregando os produtos...</div>;
+    }
+    else if (status === 'failed') {
+        tabelas = <div>Erro: {error}</div>;
+    }
+
+    
     return (
-        <TabelaGeladeira />
+        {tabelag}
     )
 } 
 
-const LinhaGeladeira = (props) => {
+const LinhaSuplementos = (props) => {
     return (
         <tr>
             <td data-label="nome">
@@ -25,7 +53,7 @@ const LinhaGeladeira = (props) => {
     );
 }
 
-function TabelaGeladeira(props) {
+function TabelaSuplementos(props) {
     return (
         <table>
             <thead>
@@ -38,7 +66,7 @@ function TabelaGeladeira(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.id} projeto={projeto} />)}
+                {props.projeto.map((projeto) => <LinhaSuplementos key={projeto.id} projeto={projeto} />)}
             </tbody>
         </table>
     );
