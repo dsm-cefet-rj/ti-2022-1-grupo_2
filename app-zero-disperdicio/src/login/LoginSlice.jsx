@@ -8,7 +8,8 @@ const initialState = loginAdapter.getInitialState({
 });
 
 export const loginServer = createAsyncThunk('login/loginServer', async (login) => {
-    return await httpPost('http://localhost:3004/login', login);
+    const req = await httpPost('http://localhost:3004/login', login);
+    return req
 })
 
 export const loginSlice = createSlice({

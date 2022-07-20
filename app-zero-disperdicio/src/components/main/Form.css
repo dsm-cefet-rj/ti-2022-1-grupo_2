@@ -10,7 +10,7 @@ form label {
     display: block;
 }
 
-#comments {
+.comments {
     resize: none;
     height: 80px;
 }

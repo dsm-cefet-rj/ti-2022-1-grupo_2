@@ -11,6 +11,9 @@ const cron = require('node-cron')
 const passport = require('passport');
 const authenticate = require('./authenticate');
 
+const session = require('express-session')
+const FileStore = require('session-file-store')(session)
+
 require('./models/Notificacao')
 require('./models/Produto')
 
@@ -25,6 +28,14 @@ const usersRouter = require('./routes/users');
 const config = require('./config');
 
 const app = express();
+
+app.use(session({
+    name: 'session-id',
+    secret: 'ABC123DEF456GHI789',
+    saveUninitialized: false,
+    resave: false,
+    store: new FileStore()
+}));
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -71,15 +82,15 @@ mongoose.connect(config.mongoURI)
     
 // Criação das notificações com o NODE CRON
 // 0 0 * * * todo os dias a 00:00 AM
-cron.schedule('*/30 * * * * *', () => {
+cron.schedule('*/10 * * * * *', () => {
     Produto.find()
         .then(produtos => {
             // console.log(produtos[0].dataValidade)
             const dataAtual = new Date()
-            const days = 0 // Dias para descontar da data de validade
-            let dataSubtraida = new Date()
+            const days = 7 // Dias para descontar da data de validade
             produtos.forEach(produto => {
                 let dataValidade = produto.dataValidade.toISOString().substr(0, 10)
+                let dataSubtraida = new Date(dataValidade + 'T00:00')
                 dataValidade = new Date(dataValidade + 'T00:00')
                 dataSubtraida.setDate(dataValidade.getDate() - days)
 
@@ -92,13 +103,13 @@ cron.schedule('*/30 * * * * *', () => {
 
                         console.log(novaNotificacao)
 
-                        // new Notificacao(novaNotificacao).save()
-                        //     .then(notificacao => {
-                        //         console.log('Notificação criada no BD')
-                        //         console.log(notificacao)
-                        //         io.emit('server:notificacao', notificacao)
-                        //     })
-                        //     .catch(err => console.log('Erro ao criar notificação no BD: ' + err))
+                        new Notificacao(novaNotificacao).save()
+                            .then(notificacao => {
+                                console.log('Notificação criada no BD')
+                                console.log(notificacao)
+                                io.emit('server:notificacao', notificacao)
+                            })
+                            .catch(err => console.log('Erro ao criar notificação no BD: ' + err))
                     }
                 }
 

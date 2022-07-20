@@ -27,17 +27,18 @@ router.post('/cadastrar', async (req, res) => {
     dados.password = await bcrypt.hash(dados.password, 8);
 
     await User.create(dados)
-    .then(() => {
-        return res.json({
-            erro: false,
-            mensagem: "Usuário cadastrado!"
-        });
-    }).catch(() => {
-        return res.status(400).json({
-            erro: true,
-            mensagem: "Erro: usuário não cadastrado com sucesso!"
-        });
-    })
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Usuário cadastrado!"
+            });
+        }).catch((e) => {
+            console.log(e)
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: usuário não cadastrado com sucesso!"
+            });
+        })
 });
 
 router.post('/login', async (req, res) => {
@@ -73,6 +74,20 @@ router.post('/login', async (req, res) => {
         mensagem: "Login realizado com sucesso!",
         token
     });
+});
+
+router.get('/logout', (req, res, next) => {
+    if (req.session) {
+        console.log(req.session)
+        req.session.destroy();
+        res.clearCookie('session-id');
+        res.redirect('/');
+    }
+    else {
+        var err = new Error('You are not logged in!');
+        err.status = 403;
+        next(err);
+    }
 });
 
 module.exports = router;

@@ -61,13 +61,12 @@ const LinhaTabela = (props) => {
     function atualizarProduto(e) {
         setOpen(!open)
         setProjeto(props.projeto)
-        console.log(props.projeto)
         setTarget(e.target)
     }
     return (
         <tr>
             <td data-label="nome">
-                <button><Link to={`/forme/${props.projeto.id}`}><span>{props.projeto.nomeProduto}</span></Link></button>
+                <span>{props.projeto.nomeProduto}</span>
             </td>
             <td data-label="validade">
                 <span>{props.projeto.dataValidade}</span>

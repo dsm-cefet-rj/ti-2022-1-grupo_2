@@ -35,9 +35,9 @@ export default function Form() {
         } else {
             console.log(product)
             dispatch(updateProjetoServer(product));
-
         }
-        navigate('/success', { replace: true });
+        setProduct({})
+        // navigate('/success', { replace: true });
     }
 
     return (
@@ -70,7 +70,7 @@ export default function Form() {
 
             <div id="comments-container">
                 <label htmlFor="comments">Comentários</label>
-                <textarea className="input" id="comments" name="comentarios" placeholder="Comentários" value={product.comentarios || ''} onChange={handleInputChange}></textarea>
+                <textarea className="input commments" name="comentarios" placeholder="Comentários" value={product.comentarios || ''} onChange={handleInputChange}></textarea>
             </div>
 
             <input id="botao-cadastrar" className="button" type="submit" value="Cadastrar" />

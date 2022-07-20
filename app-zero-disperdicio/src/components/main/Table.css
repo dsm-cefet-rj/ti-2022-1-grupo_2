@@ -52,6 +52,7 @@ tbody > tr {
         display: inline-block;
         margin-top: 10px;
         width: 150px;
+        min-height: 20px;
         text-align: right; /*Justify*/
     }
 }
@@ -68,6 +69,7 @@ tbody > tr {
 
     tbody td[data-label="comentários"] > span{
         width: 200px;
+        min-height: 20px;
         text-align: right; /*Justify*/
     }
 }

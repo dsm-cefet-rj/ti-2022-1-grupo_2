@@ -29,7 +29,7 @@ const Accordion = () => {
                 </details>
                 <details id="remedios">
                     <summary>Meus Remédios</summary>
-                    <ListagemRemedio  />
+                    <ListagemRemedio />
                 </details>
             </div>
         </Provider>

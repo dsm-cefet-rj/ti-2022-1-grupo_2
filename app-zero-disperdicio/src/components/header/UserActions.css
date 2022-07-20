@@ -15,7 +15,7 @@
 #user-options {
     visibility: hidden;
     position: absolute;
-    bottom: -80px;
+    bottom: -40px;
     z-index: 1;
     width: 200px;
     overflow-y: auto;

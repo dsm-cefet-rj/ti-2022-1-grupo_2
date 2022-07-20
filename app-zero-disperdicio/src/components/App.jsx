@@ -3,33 +3,33 @@ import Header from './header/Header';
 import Main from './main/Main'
 import CadastroForm from '../login/CadastroForm';
 import LoginForm from '../login/LoginForm';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import React, { useContext } from 'react';
 
-function Routear(props) {
-	return (
-		<Routes>
-			<Route path='logar' element={<LoginForm />} />
-		</Routes>
-	)
-}
+import Home from '../pages/home'
+import LoginAndSingup from '../pages/loginAndSingup';
+
+import {AuthProvider, AuthContext} from '../authContext/auth'
 
 function App() {
+	const Private = ({ children }) => {
+		const { authenticated } = useContext(AuthContext)
+
+		if(!authenticated){
+			return <Navigate to="/login"/>
+		}
+
+		return children
+	}
 	return (
 		<BrowserRouter>
 			<div className="App">
-				<Header />
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<h1>Cadastre-se caso não esteja cadastrado! Do contrário, entre no campo de login! </h1>
-				<CadastroForm />
-				<h1>Login!</h1>
-				<LoginForm />
-				<Main />
-				<Routear />
+				<AuthProvider>
+					<Routes>
+						<Route exact path='/login' element={<LoginAndSingup/>}></Route>
+						<Route exact path='/' element={<Private><Home/></Private>}></Route>
+					</Routes>
+				</AuthProvider>
 			</div>
 		</BrowserRouter>
 	);

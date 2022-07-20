@@ -1,0 +1,12 @@
+#login, #cadastro {
+    display: none;
+    width: 500px;
+}
+
+#login > div, #cadastro > div {
+    margin-bottom: 20px;
+}
+
+#login.active, #cadastro.active {
+    display: block;
+}

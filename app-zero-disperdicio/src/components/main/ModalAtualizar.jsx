@@ -24,7 +24,7 @@ export default function ModalAtualizar(){
     return (
         <div id="modal-atualizar" className={open ? '' : 'close'}>
             {/* <span className="closed-icon" onClick={closedAlert}></span> */}
-            <FormModal projeto={projeto} setProjeto={setProjeto}/>
+            <FormModal open={open} setOpen={setOpen} projeto={projeto} setProjeto={setProjeto}/>
         </div>
     )
 }

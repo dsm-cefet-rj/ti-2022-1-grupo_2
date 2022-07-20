@@ -1,14 +1,33 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
+import '../components/main/Table.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProjeto, selectAllProjeto } from '../components/main/ProjetoSlice';
+import { deleteProjetoServer, fetchProjeto, selectAllProjeto } from '../components/main/ProjetoSlice';
+import { Link, Route, Routes } from 'react-router-dom';
+import { Context } from '../components/main/Context';
 
-
-export default function ListagemGeladeira() {
+export default function ListagemTabela() {
     const projeto = useSelector(selectAllProjeto);
     const status = useSelector(state => state.projeto.status);
     const error = useSelector(state => state.projeto.error);
 
+    /* const projetoState = useSelector(state => state.projeto);
+    const projeto = projetoState.projeto;
+    const status = projetoState.status;
+    const error = projetoState.error; */
+    //const projeto = useSelector(state => state.projeto.projeto);
     const dispatch = useDispatch();
+
+    function handleClickExcluirProjeto(id) {
+        dispatch(deleteProjetoServer(id));
+    }
+
+    function Tabee() {
+        return (
+            <Routes>
+                <Route path='/success' element={<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} />} />
+            </Routes>
+        );
+    }
 
     useEffect(() => {
         if (status === 'not_loaded') {
@@ -16,44 +35,58 @@ export default function ListagemGeladeira() {
         }
     }, [status, dispatch])
 
-    let tabelag = '';
+    let tabela = '';
     if (status === 'loaded' || status === 'saved' || status === 'deleted') {
-        tabelag = (<TabelaGeladeira projeto={projeto}  />);
+        tabela = (<Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> || <Tabee />);
 
     }
     else if (status === 'loading') {
-        tabelag = <div>Carregando os produtos...</div>;
+        tabela = <div>Carregando os produtos...</div>;
     }
     else if (status === 'failed') {
-        tabelag = <div>Erro: {error}</div>;
+        tabela = <div>Erro: {error}</div>;
     }
 
-    
     return (
-        {tabelag}
-    )
-} 
+        <>
+            {tabela}
+            {/* <Tabela projeto={projeto} onClickExcluirProjeto={handleClickExcluirProjeto} /> */}
+        </>
+    );
 
-const LinhaGeladeira = (props) => {
+}
+
+const LinhaTabela = (props) => {
+    const {open, setOpen, projeto, setProjeto, target, setTarget} = useContext(Context)
+    function atualizarProduto(e) {
+        setOpen(!open)
+        setProjeto(props.projeto)
+        console.log(props.projeto)
+        setTarget(e.target)
+    }
     return (
         <tr>
             <td data-label="nome">
-                <span>{props.projeto.nome/* nomeProduto */}</span>
+                <span>{props.projeto.nomeProduto}</span>
             </td>
             <td data-label="validade">
-                <span>{props.projeto.dataDeValidade/* dataValidade */}</span>
+                <span>{props.projeto.dataValidade}</span>
             </td>
             <td data-label="quantidade">
                 <span>{props.projeto.quantidade}</span>
             </td>
             <td data-label="comentários">
-                <span>{props.projeto.comentarios/* comentario */}</span>
+                <span>{props.projeto.comentario}</span>
+            </td>
+            <td className="btn-container">
+                <button id="update" className="button" onClick={(e) => atualizarProduto(e)}>Atualizar</button>
+                <button id="delete" className="button" onClick={() => props.onClickExcluirProjeto(props.projeto.id)}>Apagar</button>
             </td>
         </tr>
     );
 }
 
-function TabelaGeladeira(props) {
+function Tabela(props) {
     return (
         <table>
             <thead>
@@ -62,11 +95,11 @@ function TabelaGeladeira(props) {
                     <th>Data de validade</th>
                     <th>Quantidade</th>
                     <th>Comentários</th>
-                    <th>Contém</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                {props.projeto.map((projeto) => <LinhaGeladeira key={projeto.id} projeto={projeto} />)}
+                {props.projeto.filter((projeto) => projeto.categoria === 'geladeira').map((projeto) => <LinhaTabela key={projeto.id} projeto={projeto} onClickExcluirProjeto={props.onClickExcluirProjeto} />)}
             </tbody>
         </table>
     );

@@ -4,20 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProjetoServer, updateProjetoServer, selectProjetoById } from './ProjetoSlice';
 
-export default function Form({projeto, setProjeto}) {
-    // if(!projeto){
-    //     setProjeto('')
-    // }
+export default function Form({open, setOpen, projeto, setProjeto}) {
     const dispatch = useDispatch();
     let { id } = useParams();
     id = parseInt(id);
-    // // let navigate = useNavigate();
 
     const projetoFound = useSelector(state => selectProjetoById(state, id));
-
-    // const [product, setProduct] = useState(
-    //     id ? projetoFound ?? {} : {}
-    // );
 
     const [actiontype] = useState(
         id ?
@@ -38,14 +30,14 @@ export default function Form({projeto, setProjeto}) {
         } else {
             dispatch(updateProjetoServer(projeto));
         }
-        // navigate('/success', { replace: true });
+        setOpen(false)
     }
 
     return (
         <form action="#" id="register-product" onSubmit={handleSubmit} >
             <div id="category-container">
-                <label htmlFor="product-category">Categoria</label>
-                <select id="product-category" className="input" name="category" value={projeto.categoria} onChange={handleInputChange} required >
+                <label htmlFor="prod-category">Categoria</label>
+                <select id="prod-category" className="input" name="category" value={projeto.categoria} onChange={handleInputChange} required >
                     <option value="disabled">Selecione</option>
                     <option value="geladeira">Geladeira</option>
                     <option value="armário">Armário</option>
@@ -55,20 +47,20 @@ export default function Form({projeto, setProjeto}) {
             </div>
 
             <div id="name-container">
-                <label htmlFor="name-product">Nome do produto</label>
-                <input type="text" className="input" id="name-product" name="nome" value={projeto.nomeProduto} placeholder="Nome do produto" onChange={handleInputChange} required />
+                <label htmlFor="name-prod">Nome do produto</label>
+                <input type="text" className="input" id="name-prod" name="nome" value={projeto.nomeProduto} placeholder="Nome do produto" onChange={handleInputChange} required />
             </div>
 
             <div id="expiration-container">
-                <label htmlFor="expiration-date">Data de validade</label>
-                <input type="date" className="input validade" id="expiration-date" name="dataValidade" 
+                <label htmlFor="expire-date">Data de validade</label>
+                <input type="date" className="input validade" id="expire-date" name="dataValidade" 
                 value={projeto.dataValidade ? projeto.dataValidade.substr(0, 10) : ''} 
                 onChange={handleInputChange} required />
             </div>
 
             <div id="quantity-container">
-                <label htmlFor="quantity">Quantidade</label>
-                <input type="text" className="input" id="quantity" name="quantidade" placeholder="Quantidade" value={projeto.quantidade} onChange={handleInputChange} required />
+                <label htmlFor="quant">Quantidade</label>
+                <input type="text" className="input" id="quant" name="quantidade" placeholder="Quantidade" value={projeto.quantidade} onChange={handleInputChange} required />
             </div>
 
             <div id="comments-container">
